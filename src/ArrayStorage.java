@@ -6,20 +6,19 @@ import java.util.Arrays;
  */
 public class ArrayStorage {
     Resume[] storage = new Resume[10000];
+    int size = 0;
 
     // Обнуляем массив
     void clear() {
-        Arrays.fill(storage, null);
+        if (size > 1) {
+            Arrays.fill(storage, 0, size-1, null);
+        }
     }
 
     // Находим первую ячейку == null, в нее добавляем резюме, выходим из цикла
     void save(Resume r) {
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] == null) {
-                storage[i] = r;
-                break;
-            }
-        }
+        storage[size] = r;
+        size++;
     }
 
     // Возвращаем резюме если найдено, иначе возвращаем null
@@ -49,6 +48,7 @@ public class ArrayStorage {
                 break;
             }
         }
+        size--;
     }
 
     /**
@@ -68,13 +68,6 @@ public class ArrayStorage {
     }
 
     int size() {
-        int size = 0;
-        for (Resume element : storage) {
-            if (element != null) {
-                size++;
-            } else
-                break;
-        }
         return size;
     }
 }
