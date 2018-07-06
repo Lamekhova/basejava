@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -10,9 +9,10 @@ public class ArrayStorage {
 
     // Обнуляем массив
     void clear() {
-        if (size > 1) {
-            Arrays.fill(storage, 0, size-1, null);
+        if (size > 0) {
+            Arrays.fill(storage, 0, size, null);
         }
+        size = 0;
     }
 
     // Находим первую ячейку == null, в нее добавляем резюме, выходим из цикла
@@ -35,17 +35,9 @@ public class ArrayStorage {
 
     // Удаляем резюме из storage
     void delete(String uuid) {
-        for (int i = 0; i < storage.length; i++) {
-            if (storage[i] != null && storage[i].uuid == uuid) {
-                for (int j = i; j < storage.length - 1; j++) {
-                    if (storage[j + 1] != null) {
-                        storage[j] = storage[j+1];
-                    } else {
-                        storage[j] = null;
-                        break;
-                    }
-                }
-                break;
+        for (int i = 0; i < size-1; i++) {
+            if (storage[i].uuid.equals(uuid)) {
+                System.arraycopy(storage, i + 1, storage, i, storage.length - i - 1);
             }
         }
         size--;
@@ -54,17 +46,8 @@ public class ArrayStorage {
     /**
      * @return array, contains only Resumes in storage (without null)
      */
-    // Не нашла я метод в Arrays
     Resume[] getAll() {
-        ArrayList<Resume> tempList = new ArrayList();
-        for (Resume element : storage) {
-            if (element != null) {
-                tempList.add(element);
-            } else {
-                break;
-            }
-        }
-        return tempList.toArray(new Resume[0]);
+        return Arrays.copyOfRange(storage, 0, size);
     }
 
     int size() {
