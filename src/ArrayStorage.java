@@ -9,7 +9,7 @@ public class ArrayStorage {
 
     // Обнуляем массив
     void clear() {
-            Arrays.fill(storage, 0, size, null);
+        Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
