@@ -1,13 +1,15 @@
-package com.urise.storage;
+package com.urise;
 
 import com.urise.model.Resume;
 import com.urise.storage.ArrayStorage;
+import com.urise.storage.SortedArrayStorage;
+import com.urise.storage.Storage;
 
 /**
  * Test for com.urise.webapp.storage.com.urise.storage.ArrayStorage
  */
 public class MainTestArrayStorage {
-    private static final Storage ARRAY_STORAGE = new ArrayStorage();
+    private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {
         final Resume r1 = new Resume();
@@ -16,7 +18,6 @@ public class MainTestArrayStorage {
         r2.setUuid("uuid2");
         final Resume r3 = new Resume();
         r3.setUuid("uuid3");
-
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r2);
