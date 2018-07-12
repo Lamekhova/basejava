@@ -11,12 +11,19 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             System.out.println("ERROR: Storage is full");
         }
 
-        if (getIndexByUuid(r.getUuid()) == -1) {
+        int foundIndex = Arrays.binarySearch(storage, 0, size, r);
+        if (foundIndex > -1) {
             System.out.println("ERROR: Resume has already been added in storage");
         } else {
-            int indexForInsert = Arrays.binarySearch(storage, 0, size, r);
-            System.arraycopy(storage, indexForInsert + 1, storage, indexForInsert, storage.length - indexForInsert - 1);
-            storage[indexForInsert] = r;
+            //find proper position
+            int positionToInsert = - (foundIndex + 1);
+            //copy elements to +1 position
+            if (positionToInsert < size) {
+                System.arraycopy(storage, positionToInsert, storage,
+                        positionToInsert + 1, storage.length - positionToInsert - 1);
+            }
+            //insert resume to proper position
+            storage[positionToInsert] = r;
             size++;
         }
     }
