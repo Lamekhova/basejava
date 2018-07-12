@@ -1,5 +1,8 @@
+package com.urise;
+
 import com.urise.model.Resume;
 import com.urise.storage.ArrayStorage;
+import com.urise.storage.Storage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +12,7 @@ import java.io.InputStreamReader;
  * Test for com.urise.webapp.storage.com.urise.storage.ArrayStorage
  */
 public class MainArray {
-    private final static ArrayStorage ARRAY_STORAGE = new ArrayStorage();
+    private final static Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));

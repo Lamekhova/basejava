@@ -1,35 +1,31 @@
 package com.urise.storage;
 
 import com.urise.model.Resume;
-
 import java.util.Arrays;
 
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage {
-    private Resume[] storage = new Resume[1000];
-    private int size = 0;
+public class ArrayStorage extends AbstractArrayStorage{
 
-    // Reset the array
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
     }
 
-    // Add resume in first free cell if it not exists in storage
     public void save(Resume r) {
-        if (getIndexOfResumeByUuid(r.getUuid()) == null && size < storage.length) {
+        if (size < storage.length) {
+            System.out.println("ERROR: Storage is full");
+        } else if (getIndexByUuid(r.getUuid()) != null) {
+            System.out.println("ERROR: Resume has already been added in storage");
+        } else {
             storage[size] = r;
             size++;
-        } else {
-            System.out.println("ERROR: Resume has already been added in storage or storage is full");
         }
     }
 
-    // Update resume if it exists in storage
     public void update(Resume r) {
-        Integer indexResume = getIndexOfResumeByUuid(r.getUuid());
+        Integer indexResume = getIndexByUuid(r.getUuid());
         if (indexResume != null) {
             storage[indexResume] = r;
             System.out.println("Resume " + r.getUuid() + " has been updated");
@@ -38,20 +34,8 @@ public class ArrayStorage {
         }
     }
 
-    // Return resume if it exist in storage
-    public Resume get(String uuid) {
-        Integer indexResume = getIndexOfResumeByUuid(uuid);
-        if (indexResume != null) {
-            return storage[indexResume];
-        } else {
-            System.out.println("ERROR: Resume does not exist in storage");
-            return null;
-        }
-    }
-
-    // Delete resume if it exist in storage
     public void delete(String uuid) {
-        Integer indexResume = getIndexOfResumeByUuid(uuid);
+        Integer indexResume = getIndexByUuid(uuid);
         if (indexResume != null) {
             storage[indexResume] = storage[size - 1];
             storage[size - 1] = null;
@@ -62,7 +46,7 @@ public class ArrayStorage {
     }
 
     // Return index of resume if it exists in storage
-    public Integer getIndexOfResumeByUuid(String uuid) {
+    protected Integer getIndexByUuid(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
@@ -78,7 +62,4 @@ public class ArrayStorage {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
-    public int size() {
-        return size;
-    }
 }
