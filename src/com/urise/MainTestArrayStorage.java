@@ -9,7 +9,7 @@ import com.urise.storage.Storage;
  * Test for com.urise.webapp.storage.com.urise.storage.ArrayStorage
  */
 public class MainTestArrayStorage {
-    private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
+    private static final Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) {
         final Resume r1 = new Resume();
@@ -18,6 +18,8 @@ public class MainTestArrayStorage {
         r2.setUuid("uuid2");
         final Resume r3 = new Resume();
         r3.setUuid("uuid3");
+        final Resume r4 = new Resume();
+        r4.setUuid("uuid4");
 
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r3);
@@ -25,7 +27,7 @@ public class MainTestArrayStorage {
 
         System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());
-        System.out.println("Get uuid3: " + ARRAY_STORAGE.get("uuid3"));
+        System.out.println("Get uuid4: " + ARRAY_STORAGE.get("uuid4"));
 
         printAll();
         ARRAY_STORAGE.delete(r1.getUuid());

@@ -7,11 +7,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     public void save(Resume r) {
-        if (size >= storage.length) {
-            System.out.println("ERROR: Storage is full");
-        }
-
-        int foundIndex = Arrays.binarySearch(storage, 0, size, r);
+        super.save(r);
+        int foundIndex = getIndexByUuid(r.getUuid());
         if (foundIndex > -1) {
             System.out.println("ERROR: Resume has already been added in storage");
         } else {
@@ -25,6 +22,18 @@ public class SortedArrayStorage extends AbstractArrayStorage {
             //insert resume to proper position
             storage[positionToInsert] = r;
             size++;
+        }
+    }
+
+    @Override
+    public void delete(String uuid) {
+        Integer indexResume = getIndexByUuid(uuid);
+        if (indexResume >= 0) {
+            System.arraycopy(storage, indexResume + 1, storage, indexResume, storage.length - indexResume - 1);
+            size--;
+            System.out.println("Resume " + uuid + " has been deleted");
+        } else {
+            System.out.println("ERROR: Resume does not exist in storage");
         }
     }
 

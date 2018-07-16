@@ -22,6 +22,12 @@ public abstract class AbstractArrayStorage implements Storage {
         size = 0;
     }
 
+    public void save(Resume r) {
+        if (size >= storage.length) {
+            System.out.println("ERROR: Storage is full");
+        }
+    }
+
     public void update(Resume r) {
         Integer indexResume = getIndexByUuid(r.getUuid());
         if (indexResume >= 0) {
@@ -34,24 +40,15 @@ public abstract class AbstractArrayStorage implements Storage {
 
     public Resume get(String uuid) {
         Integer indexResume = getIndexByUuid(uuid);
-        if (indexResume != null) {
+        if (indexResume >= 0) {
             return storage[indexResume];
         } else {
-            System.out.println("ERROR: Resume does not exist in storage");
+            System.out.println("ERROR: Resume " + uuid + " does not exist in storage");
             return null;
         }
     }
 
-    public void delete(String uuid) {
-        Integer indexResume = getIndexByUuid(uuid);
-        if (indexResume >= 0) {
-            System.arraycopy(storage, indexResume + 1, storage, indexResume, storage.length - indexResume - 1);
-            size--;
-            System.out.println("Resume " + uuid + " has been deleted");
-        } else {
-            System.out.println("ERROR: Resume does not exist in storage");
-        }
-    }
+    public abstract void delete(String uuid);
 
     protected abstract Integer getIndexByUuid(String uuid);
 
