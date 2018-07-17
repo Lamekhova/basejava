@@ -8,30 +8,6 @@ import com.urise.model.Resume;
 public class ArrayStorage extends AbstractArrayStorage{
 
     @Override
-    public void save(Resume r) {
-        super.save(r);
-        if (getIndexByUuid(r.getUuid()) >= 0) {
-            System.out.println("ERROR: Resume has already been added in storage");
-        } else {
-            storage[size] = r;
-            size++;
-        }
-    }
-
-    @Override
-    public void delete(String uuid) {
-        Integer indexResume = getIndexByUuid(uuid);
-        if (indexResume >= 0) {
-            storage[indexResume] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
-        } else {
-            System.out.println("ERROR: Resume does not exist in storage");
-        }
-    }
-
-    // Return index of resume if it exists in storage
-    @Override
     protected Integer getIndexByUuid(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
@@ -39,5 +15,16 @@ public class ArrayStorage extends AbstractArrayStorage{
             }
         }
         return -1;
+    }
+
+    @Override
+    public void insertElement(Resume r) {
+        storage[size] = r;
+    }
+
+    @Override
+    public void shiftElement(int indexResume) {
+        storage[indexResume] = storage[size - 1];
+        storage[size - 1] = null;
     }
 }
