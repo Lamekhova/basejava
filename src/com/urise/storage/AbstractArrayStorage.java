@@ -23,46 +23,46 @@ public abstract class AbstractArrayStorage implements Storage {
         System.out.println("Storage was cleaned");
     }
 
-    public void save(Resume r) {
+    public void save(Resume resume) {
+        int indexResume = getIndex(resume.getUuid());
         if (size >= storage.length) {
             System.out.println("ERROR: Storage is full");
         }
-        if (getIndexByUuid(r.getUuid()) > -1) {
-            System.out.println("ERROR: Resume " + r.getUuid() + " has already been added in storage");
+        if (getIndex(resume.getUuid()) > -1) {
+            System.out.println("ERROR: Resume " + resume.getUuid() + " has already been added in storage");
         } else {
-            insertElement(r);
+            insertElement(resume, indexResume);
             size++;
-            System.out.println("Resume " + r.getUuid() + " was added in storage");
+            System.out.println("Resume " + resume.getUuid() + " was added in storage");
         }
     }
 
-    public void update(Resume r) {
-        Integer indexResume = getIndexByUuid(r.getUuid());
+    public void update(Resume resume) {
+        int indexResume = getIndex(resume.getUuid());
         if (indexResume > -1) {
-            storage[indexResume] = r;
-            System.out.println("Resume " + r.getUuid() + " has been updated");
+            storage[indexResume] = resume;
+            System.out.println("Resume " + resume.getUuid() + " has been updated");
         } else {
-            System.out.println("ERROR: Resume " + r.getUuid() + "does not exist in storage");
+            System.out.println("ERROR: Resume " + resume.getUuid() + "does not exist in storage");
         }
     }
 
     public Resume get(String uuid) {
-        Integer indexResume = getIndexByUuid(uuid);
+        int indexResume = getIndex(uuid);
         if (indexResume > -1) {
             return storage[indexResume];
-        } else {
-            System.out.println("ERROR: Resume " + uuid + " does not exist in storage");
-            return null;
         }
+        System.out.println("ERROR: Resume " + uuid + " does not exist in storage");
+        return null;
     }
 
     @Override
     public void delete(String uuid) {
-        int indexResume = getIndexByUuid(uuid);
+        int indexResume = getIndex(uuid);
         if (indexResume > -1) {
             shiftElement(indexResume);
             size--;
-            System.out.println("ERROR: Resume " + uuid + " has been deleted");
+            System.out.println("Resume " + uuid + " has been deleted");
         } else {
             System.out.println("ERROR: Resume " + uuid + " does not exist in storage");
         }
@@ -73,9 +73,9 @@ public abstract class AbstractArrayStorage implements Storage {
     }
 
     // Return index of resume if it exists in storage
-    protected abstract Integer getIndexByUuid(String uuid);
+    protected abstract int getIndex(String uuid);
 
-    public abstract void insertElement(Resume r);
+    public abstract void insertElement(Resume r, int indexResume);
 
     public abstract void shiftElement(int indexResume);
 }

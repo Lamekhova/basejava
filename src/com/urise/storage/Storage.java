@@ -14,10 +14,10 @@ public interface Storage {
     void clear();
 
     // Save resume in first free cell in storage
-    void save(Resume r);
+    void save(Resume resume);
 
     // Update resume in storage
-    void update(Resume r);
+    void update(Resume resume);
 
     // Return resume from storage
     Resume get(String uuid);

@@ -5,10 +5,10 @@ import com.urise.model.Resume;
 /**
  * Array based storage for Resumes
  */
-public class ArrayStorage extends AbstractArrayStorage{
+public class ArrayStorage extends AbstractArrayStorage {
 
     @Override
-    protected Integer getIndexByUuid(String uuid) {
+    protected int getIndex(String uuid) {
         for (int i = 0; i < size; i++) {
             if (storage[i].getUuid().equals(uuid)) {
                 return i;
@@ -18,8 +18,8 @@ public class ArrayStorage extends AbstractArrayStorage{
     }
 
     @Override
-    public void insertElement(Resume r) {
-        storage[size] = r;
+    public void insertElement(Resume resume, int indexResume) {
+        storage[size] = resume;
     }
 
     @Override
