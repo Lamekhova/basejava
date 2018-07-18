@@ -1,5 +1,8 @@
 package com.urise.storage;
 
+import com.urise.exception.ExistStorageExeption;
+import com.urise.exception.NotExistStorageExeption;
+import com.urise.exception.StorageException;
 import com.urise.model.Resume;
 
 import java.util.Arrays;
@@ -26,10 +29,10 @@ public abstract class AbstractArrayStorage implements Storage {
     public void save(Resume resume) {
         int indexResume = getIndex(resume.getUuid());
         if (size >= storage.length) {
-            System.out.println("ERROR: Storage is full");
+            throw new StorageException("Storage overflow", resume.getUuid());
         }
         if (getIndex(resume.getUuid()) > -1) {
-            System.out.println("ERROR: Resume " + resume.getUuid() + " has already been added in storage");
+            throw new ExistStorageExeption(resume.getUuid());
         } else {
             insertElement(resume, indexResume);
             size++;
@@ -43,7 +46,7 @@ public abstract class AbstractArrayStorage implements Storage {
             storage[indexResume] = resume;
             System.out.println("Resume " + resume.getUuid() + " has been updated");
         } else {
-            System.out.println("ERROR: Resume " + resume.getUuid() + "does not exist in storage");
+            throw new NotExistStorageExeption(resume.getUuid());
         }
     }
 
@@ -52,8 +55,7 @@ public abstract class AbstractArrayStorage implements Storage {
         if (indexResume > -1) {
             return storage[indexResume];
         }
-        System.out.println("ERROR: Resume " + uuid + " does not exist in storage");
-        return null;
+        throw new NotExistStorageExeption(uuid);
     }
 
     @Override
@@ -61,10 +63,11 @@ public abstract class AbstractArrayStorage implements Storage {
         int indexResume = getIndex(uuid);
         if (indexResume > -1) {
             shiftElement(indexResume);
+            storage[size - 1] = null;
             size--;
             System.out.println("Resume " + uuid + " has been deleted");
         } else {
-            System.out.println("ERROR: Resume " + uuid + " does not exist in storage");
+            throw new NotExistStorageExeption(uuid);
         }
     }
 

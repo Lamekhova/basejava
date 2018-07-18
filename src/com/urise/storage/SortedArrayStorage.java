@@ -8,8 +8,7 @@ public class SortedArrayStorage extends AbstractArrayStorage {
 
     @Override
     protected int getIndex(String uuid) {
-        Resume searchKey = new Resume();
-        searchKey.setUuid(uuid);
+        Resume searchKey = new Resume(uuid);
         return Arrays.binarySearch(storage, 0, size, searchKey);
     }
 
@@ -18,10 +17,8 @@ public class SortedArrayStorage extends AbstractArrayStorage {
         //find proper position
         int positionToInsert = -(indexResume + 1);
         //copy elements to +1 position
-        if (positionToInsert < size) {
-            System.arraycopy(storage, positionToInsert, storage,
-                    positionToInsert + 1, size - positionToInsert);
-        }
+        System.arraycopy(storage, positionToInsert, storage,
+                positionToInsert + 1, size - positionToInsert);
         //insert resume to proper position
         storage[positionToInsert] = resume;
     }

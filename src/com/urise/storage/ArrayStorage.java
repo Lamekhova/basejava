@@ -25,6 +25,6 @@ public class ArrayStorage extends AbstractArrayStorage {
     @Override
     public void shiftElement(int indexResume) {
         storage[indexResume] = storage[size - 1];
-        storage[size - 1] = null;
+
     }
 }
