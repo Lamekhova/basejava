@@ -1,11 +1,12 @@
 package com.urise.storage;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ArrayStorageTest extends AbstractArrayStorageTest {
 
-    public ArrayStorageTest(Storage storage) {
-        super(storage);
+    public ArrayStorageTest() {
+        super(new ArrayStorage());
     }
 
     @Test
