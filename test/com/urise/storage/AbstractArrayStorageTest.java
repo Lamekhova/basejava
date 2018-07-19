@@ -102,10 +102,6 @@ public abstract class AbstractArrayStorageTest {
         Assert.assertTrue(setAllResume.containsAll(Set.of(UUID_1, UUID_2, UUID_3)));
     }
 
-    @Test
-    public void getIndex() {
-    }
-
     private void assertSave(int size) {
         Assert.assertEquals(size, storage.size());
     }
