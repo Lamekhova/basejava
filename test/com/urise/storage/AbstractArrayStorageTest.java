@@ -1,5 +1,6 @@
 package com.urise.storage;
 
+import com.urise.exception.ExistStorageExeption;
 import com.urise.exception.NotExistStorageExeption;
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
@@ -55,14 +56,19 @@ public abstract class AbstractArrayStorageTest {
         Assert.assertEquals(RESUME_4, storage.get(UUID_4));
     }
 
+    @Test(expected = ExistStorageExeption.class)
+    public void saveExist() {
+        storage.save(RESUME_1);
+    }
+
     @Test(expected = StorageException.class)
     public void saveWithOverflow() {
         try {
             for (int i = storage.size(); i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume(Integer.toString(i)));
+                storage.save(new Resume(i + ""));
             }
         } catch (StorageException e) {
-            Assert.fail();
+            Assert.fail("ERROR: Failed to add Resume");
         }
         storage.save(RESUME_4);
     }
@@ -79,11 +85,9 @@ public abstract class AbstractArrayStorageTest {
         storage.get(UUID_4);
     }
 
-    @Test
+    @Test(expected = NotExistStorageExeption.class)
     public void get() {
-        Resume resume = storage.get(UUID_1);
-        assertSize(3);
-        Assert.assertEquals(UUID_1, resume.getUuid());
+        storage.get(UUID_4);
     }
 
     @Test(expected = NotExistStorageExeption.class)
@@ -105,9 +109,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
-        Resume[] allResume = storage.getAll();
-        Assert.assertEquals(3, allResume.length);
-        Arrays.equals(allResume, new Storage[]{storage});
+        Arrays.equals(new Resume[]{RESUME_1, RESUME_2, RESUME_3}, storage.getAll());
     }
 
     private void assertSize(int size) {
