@@ -8,8 +8,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 public abstract class AbstractArrayStorageTest {
 
     private Storage storage;
@@ -85,9 +83,9 @@ public abstract class AbstractArrayStorageTest {
         storage.get(UUID_4);
     }
 
-    @Test(expected = NotExistStorageExeption.class)
+    @Test
     public void get() {
-        storage.get(UUID_4);
+        Assert.assertEquals(UUID_1, storage.get(RESUME_1.getUuid()));
     }
 
     @Test(expected = NotExistStorageExeption.class)
@@ -109,7 +107,8 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void getAll() {
-        Arrays.equals(new Resume[]{RESUME_1, RESUME_2, RESUME_3}, storage.getAll());
+        Resume[] allResume = {RESUME_1, RESUME_2, RESUME_3};
+        Assert.assertArrayEquals(allResume, storage.getAll());
     }
 
     private void assertSize(int size) {
