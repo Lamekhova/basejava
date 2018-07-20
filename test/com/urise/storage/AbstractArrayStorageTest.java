@@ -4,9 +4,9 @@ import com.urise.exception.ExistStorageExeption;
 import com.urise.exception.NotExistStorageExeption;
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public abstract class AbstractArrayStorageTest {
 
@@ -51,7 +51,7 @@ public abstract class AbstractArrayStorageTest {
     public void save() {
         storage.save(RESUME_4);
         assertSize(4);
-        Assert.assertEquals(RESUME_4, storage.get(UUID_4));
+        assertEquals(RESUME_4, storage.get(UUID_4));
     }
 
     @Test(expected = ExistStorageExeption.class)
@@ -66,7 +66,7 @@ public abstract class AbstractArrayStorageTest {
                 storage.save(new Resume(i + ""));
             }
         } catch (StorageException e) {
-            Assert.fail("ERROR: Failed to add Resume");
+            fail("ERROR: Failed to add Resume");
         }
         storage.save(RESUME_4);
     }
@@ -75,7 +75,7 @@ public abstract class AbstractArrayStorageTest {
     public void update() {
         Resume newResume = new Resume(UUID_1);
         storage.update(newResume);
-        Assert.assertEquals(newResume, storage.get(UUID_1));
+        assertEquals(newResume, storage.get(UUID_1));
     }
 
     @Test(expected = NotExistStorageExeption.class)
@@ -85,7 +85,7 @@ public abstract class AbstractArrayStorageTest {
 
     @Test
     public void get() {
-        Assert.assertEquals(UUID_1, storage.get(RESUME_1.getUuid()));
+        assertEquals(RESUME_1, storage.get("uuid1"));
     }
 
     @Test(expected = NotExistStorageExeption.class)
@@ -108,10 +108,10 @@ public abstract class AbstractArrayStorageTest {
     @Test
     public void getAll() {
         Resume[] allResume = {RESUME_1, RESUME_2, RESUME_3};
-        Assert.assertArrayEquals(allResume, storage.getAll());
+        assertArrayEquals(allResume, storage.getAll());
     }
 
     private void assertSize(int size) {
-        Assert.assertEquals(size, storage.size());
+        assertEquals(size, storage.size());
     }
 }
