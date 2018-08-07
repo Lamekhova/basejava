@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public abstract class AbstractArrayStorageTest {
+public abstract class AbstractStorageTest {
 
     private Storage storage;
 
@@ -24,7 +24,7 @@ public abstract class AbstractArrayStorageTest {
     private static final String UUID_4 = "uuid4";
     private static final Resume RESUME_4 = new Resume(UUID_4);
 
-    public AbstractArrayStorageTest(Storage storage) {
+    public AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 
