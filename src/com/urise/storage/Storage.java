@@ -13,6 +13,11 @@ public interface Storage {
     // Reset the storage
     void clear();
 
+    /**
+     * @return array, contains only Resumes in storage (without null)
+     */
+    Resume[] getAll();
+
     // Save resume in first free cell in storage
     void save(Resume resume);
 
@@ -25,9 +30,5 @@ public interface Storage {
     // Delete resume from storage
     void delete(String uuid);
 
-    /**
-     * @return array, contains only Resumes in storage (without null)
-     */
 
-    Resume[] getAll();
 }

@@ -1,21 +1,21 @@
 package com.urise.storage;
 
-import com.urise.exception.ExistStorageExeption;
-import com.urise.exception.NotExistStorageExeption;
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-
 import java.util.Arrays;
 
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage implements Storage {
-    protected static final int STORAGE_LIMIT = 1000;
+public abstract class AbstractArrayStorage extends AbstractStorage {
 
-    protected Resume[] storage = new Resume[STORAGE_LIMIT];
-    protected int size = 0;
+    public abstract Integer getSearchKey(String uuid);
 
+    public abstract void insertElement(Resume r, int indexResume);
+
+    public abstract void shiftElement(int indexResume);
+
+    @Override
     public int size() {
         return size;
     }
@@ -26,59 +26,42 @@ public abstract class AbstractArrayStorage implements Storage {
         System.out.println("Storage was cleaned");
     }
 
-    public void save(Resume resume) {
-        int indexResume = getIndex(resume.getUuid());
-        if (size >= storage.length) {
-            throw new StorageException("Storage overflow", resume.getUuid());
-        }
-        if (getIndex(resume.getUuid()) > -1) {
-            throw new ExistStorageExeption(resume.getUuid());
-        } else {
-            insertElement(resume, indexResume);
-            size++;
-            System.out.println("Resume " + resume.getUuid() + " was added in storage");
-        }
-    }
-
-    public void update(Resume resume) {
-        int indexResume = getIndex(resume.getUuid());
-        if (indexResume > -1) {
-            storage[indexResume] = resume;
-            System.out.println("Resume " + resume.getUuid() + " has been updated");
-        } else {
-            throw new NotExistStorageExeption(resume.getUuid());
-        }
-    }
-
-    public Resume get(String uuid) {
-        int indexResume = getIndex(uuid);
-        if (indexResume > -1) {
-            return storage[indexResume];
-        }
-        throw new NotExistStorageExeption(uuid);
-    }
-
-    @Override
-    public void delete(String uuid) {
-        int indexResume = getIndex(uuid);
-        if (indexResume > -1) {
-            shiftElement(indexResume);
-            storage[size - 1] = null;
-            size--;
-            System.out.println("Resume " + uuid + " has been deleted");
-        } else {
-            throw new NotExistStorageExeption(uuid);
-        }
-    }
-
     public Resume[] getAll() {
         return Arrays.copyOfRange(storage, 0, size);
     }
 
-    // Return index of resume if it exists in storage
-    protected abstract int getIndex(String uuid);
+    @Override
+    public void doUpdate(Resume resume, Object searchKey) {
+        storage[(Integer) searchKey] = resume;
+        System.out.println("Resume " + resume.getUuid() + " has been updated");
+    }
 
-    public abstract void insertElement(Resume r, int indexResume);
+    @Override
+    public void doSave(Resume resume, Object searchKey) {
+        if (size >= storage.length) {
+            throw new StorageException("Storage overflow", resume.getUuid());
+        }
+        insertElement(resume, (Integer) getSearchKey(resume.getUuid()));
+        System.out.println("Resume " + resume.getUuid() + " was added in storage");
+    }
 
-    public abstract void shiftElement(int indexResume);
+    @Override
+    public void  doDelete(Object searchKey) {
+        shiftElement((Integer) searchKey);
+        storage[size - 1] = null;
+        System.out.println("Resume " + searchKey.toString() + " has been deleted");
+    }
+
+    @Override
+    public Resume doGet(Object searchKey) {
+        return storage[(Integer) searchKey];
+    }
+
+    @Override
+    public boolean isExist(Object searchKey) {
+        return (Integer) searchKey >= 0;
+    }
+
+
+
 }
