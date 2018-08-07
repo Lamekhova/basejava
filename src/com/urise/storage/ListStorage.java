@@ -2,11 +2,10 @@ package com.urise.storage;
 
 import com.urise.model.Resume;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ListStorage extends AbstractStorage{
 
-    protected List<Resume> listStorage = new ArrayList();
+    protected ArrayList<Resume> listStorage = new ArrayList();
 
     @Override
     public int size() {
@@ -44,7 +43,7 @@ public class ListStorage extends AbstractStorage{
     }
 
     public void doDelete(Object searchKey) {
-        listStorage.remove(searchKey);
+        listStorage.remove((int)searchKey);
     }
 
     @Override

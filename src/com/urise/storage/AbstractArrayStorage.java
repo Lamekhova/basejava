@@ -9,6 +9,8 @@ import java.util.Arrays;
  */
 public abstract class AbstractArrayStorage extends AbstractStorage {
 
+    protected Resume[] storage = new Resume[STORAGE_LIMIT];
+
     public abstract Integer getSearchKey(String uuid);
 
     public abstract void insertElement(Resume r, int indexResume);
@@ -61,7 +63,5 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public boolean isExist(Object searchKey) {
         return (Integer) searchKey >= 0;
     }
-
-
 
 }
