@@ -6,21 +6,17 @@ import com.urise.model.Resume;
 
 public abstract class AbstractStorage implements Storage{
 
-    protected static final int STORAGE_LIMIT = 10000;
+    protected abstract Object getSearchKey(String uuid);
 
-    protected int size = 0;
+    protected abstract void doUpdate(Resume resume, Object searchKey);
 
-    public abstract Object getSearchKey(String uuid);
+    protected abstract void doSave(Resume resume, Object searchKey);
 
-    public abstract void doUpdate(Resume resume, Object searchKey);
+    protected abstract void doDelete(Object searchKey, String uuid);
 
-    public abstract void doSave(Resume resume, Object searchKey);
+    protected abstract Resume doGet(Object searchKey);
 
-    public abstract void doDelete(Object searchKey);
-
-    public abstract Resume doGet(Object searchKey);
-
-    public abstract boolean isExist(Object searchKey);
+    protected abstract boolean isExist(Object searchKey);
 
     public void update(Resume resume) {
         Object searchKey = getExistSearchKey(resume.getUuid());
@@ -30,14 +26,12 @@ public abstract class AbstractStorage implements Storage{
     public void save(Resume resume) {
         Object searchKey = getNotExistSearchKey(resume.getUuid());
         doSave(resume, searchKey);
-        size++;
     }
 
     @Override
     public void delete(String uuid) {
         Object searchKey = getExistSearchKey(uuid);
-        doDelete(searchKey);
-        size--;
+        doDelete(searchKey, uuid);
     }
 
     public Resume get(String uuid) {

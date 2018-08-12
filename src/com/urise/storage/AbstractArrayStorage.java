@@ -4,18 +4,15 @@ import com.urise.exception.StorageException;
 import com.urise.model.Resume;
 import java.util.Arrays;
 
-/**
- * Array based storage for Resumes
- */
 public abstract class AbstractArrayStorage extends AbstractStorage {
 
+    protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
+    protected int size = 0;
 
-    public abstract Integer getSearchKey(String uuid);
+    protected abstract void insertElement(Resume resume, int indexResume);
 
-    public abstract void insertElement(Resume r, int indexResume);
-
-    public abstract void shiftElement(int indexResume);
+    protected abstract void shiftElement(int indexResume);
 
     @Override
     public int size() {
@@ -43,14 +40,16 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         if (size >= storage.length) {
             throw new StorageException("Storage overflow", resume.getUuid());
         }
-        insertElement(resume, (Integer) getSearchKey(resume.getUuid()));
+        insertElement(resume, (Integer) searchKey);
+        size++;
         System.out.println("Resume " + resume.getUuid() + " was added in storage");
     }
 
     @Override
-    public void  doDelete(Object searchKey) {
+    public void doDelete(Object searchKey, String uuid) {
         shiftElement((Integer) searchKey);
         storage[size - 1] = null;
+        size--;
         System.out.println("Resume " + searchKey.toString() + " has been deleted");
     }
 

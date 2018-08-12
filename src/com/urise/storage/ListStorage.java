@@ -1,11 +1,13 @@
 package com.urise.storage;
 
 import com.urise.model.Resume;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListStorage extends AbstractStorage{
 
-    protected ArrayList<Resume> listStorage = new ArrayList();
+    protected List<Resume> listStorage = new ArrayList();
 
     @Override
     public int size() {
@@ -19,7 +21,7 @@ public class ListStorage extends AbstractStorage{
 
     @Override
     public Resume[] getAll() {
-        return listStorage.toArray(new Resume[listStorage.size()]);
+        return listStorage.toArray(new Resume[0]);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class ListStorage extends AbstractStorage{
         listStorage.add(resume);
     }
 
-    public void doDelete(Object searchKey) {
+    public void doDelete(Object searchKey, String uuid) {
         listStorage.remove((int)searchKey);
     }
 

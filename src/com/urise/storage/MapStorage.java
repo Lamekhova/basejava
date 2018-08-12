@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class MapStorage extends AbstractStorage {
 
-    protected HashMap<String, Resume> mapStorage = new HashMap();
+    protected Map<String, Resume> mapStorage = new HashMap();
 
     @Override
     public int size() {
@@ -20,17 +20,12 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public Resume[] getAll() {
-        return (Resume[]) mapStorage.values().toArray();
+        return mapStorage.values().toArray(new Resume[0]);
     }
 
     @Override
     public Object getSearchKey(String uuid) {
-        for (Map.Entry<String, Resume> pair : mapStorage.entrySet()) {
-            if (pair.getValue().getUuid().equals(uuid)) {
-                return pair.getKey();
-            }
-        }
-        return null;
+        return uuid;
     }
 
     // ???
@@ -44,7 +39,7 @@ public class MapStorage extends AbstractStorage {
         mapStorage.put(String.valueOf(searchKey), resume);
     }
 
-    public void doDelete(Object searchKey) {
+    public void doDelete(Object searchKey, String uuid) {
         mapStorage.remove(searchKey);
     }
 
@@ -55,7 +50,7 @@ public class MapStorage extends AbstractStorage {
 
     @Override
     public boolean isExist(Object searchKey) {
-        return searchKey != null;
+        return mapStorage.containsKey(searchKey);
     }
 
 

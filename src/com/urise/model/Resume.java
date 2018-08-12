@@ -1,8 +1,5 @@
 package com.urise.model;
 
-/**
- * com.urise.webapp.model.com.urise.model.Resume class
- */
 public class Resume implements Comparable<Resume>{
 
     // Unique identifier
