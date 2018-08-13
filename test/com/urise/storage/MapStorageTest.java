@@ -4,7 +4,6 @@ import com.urise.model.Resume;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,7 +22,7 @@ public class MapStorageTest extends AbstractStorageTest{
 
     @Test
     public void getAll() {
-        Set<Resume> allResume = new HashSet<>(Arrays.asList(storage.getAll()));
+        Set<Resume> allResume = new HashSet<>(storage.getAllSorted());
         assertTrue(allResume.contains(RESUME_1));
         assertTrue(allResume.contains(RESUME_2));
         assertTrue(allResume.contains(RESUME_3));

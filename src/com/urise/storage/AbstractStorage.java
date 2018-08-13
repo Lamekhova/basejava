@@ -12,7 +12,7 @@ public abstract class AbstractStorage implements Storage{
 
     protected abstract void doSave(Resume resume, Object searchKey);
 
-    protected abstract void doDelete(Object searchKey, String uuid);
+    protected abstract void doDelete(Object searchKey);
 
     protected abstract Resume doGet(Object searchKey);
 
@@ -31,7 +31,7 @@ public abstract class AbstractStorage implements Storage{
     @Override
     public void delete(String uuid) {
         Object searchKey = getExistSearchKey(uuid);
-        doDelete(searchKey, uuid);
+        doDelete(searchKey);
     }
 
     public Resume get(String uuid) {

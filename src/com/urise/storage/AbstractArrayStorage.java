@@ -2,7 +2,11 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
 
@@ -25,8 +29,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         System.out.println("Storage was cleaned");
     }
 
-    public Resume[] getAll() {
-        return Arrays.copyOfRange(storage, 0, size);
+    public List<Resume> getAllSorted() {
+        List<Resume> allResume = new ArrayList<>();
+        allResume.addAll(Arrays.asList(Arrays.copyOfRange(storage, 0, size)));
+        Collections.sort(allResume);
+        return allResume;
     }
 
     @Override
@@ -46,7 +53,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public void doDelete(Object searchKey, String uuid) {
+    public void doDelete(Object searchKey) {
         shiftElement((Integer) searchKey);
         storage[size - 1] = null;
         size--;

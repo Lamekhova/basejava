@@ -1,8 +1,7 @@
 package com.urise.storage;
 
 import com.urise.model.Resume;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class MapStorage extends AbstractStorage {
 
@@ -19,8 +18,11 @@ public class MapStorage extends AbstractStorage {
     }
 
     @Override
-    public Resume[] getAll() {
-        return mapStorage.values().toArray(new Resume[0]);
+    public List<Resume> getAllSorted() {
+        List<Resume> allResume = new ArrayList();
+        allResume.addAll(mapStorage.values());
+        Collections.sort(allResume);
+        return allResume;
     }
 
     @Override
@@ -28,7 +30,6 @@ public class MapStorage extends AbstractStorage {
         return uuid;
     }
 
-    // ???
     @Override
     public void doUpdate(Resume resume, Object searchKey) {
         mapStorage.put(String.valueOf(searchKey), resume);
@@ -39,7 +40,7 @@ public class MapStorage extends AbstractStorage {
         mapStorage.put(String.valueOf(searchKey), resume);
     }
 
-    public void doDelete(Object searchKey, String uuid) {
+    public void doDelete(Object searchKey) {
         mapStorage.remove(searchKey);
     }
 

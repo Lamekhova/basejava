@@ -6,6 +6,7 @@ import com.urise.exception.StorageException;
 import com.urise.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public abstract class AbstractStorageTest {
@@ -13,16 +14,16 @@ public abstract class AbstractStorageTest {
     protected Storage storage;
 
     protected static final String UUID_1 = "uuid1";
-    protected static final Resume RESUME_1 = new Resume(UUID_1);
+    protected static final Resume RESUME_1 = new Resume(UUID_1, "John Dorian");
 
     protected static final String UUID_2 = "uuid2";
-    protected static final Resume RESUME_2 = new Resume(UUID_2);
+    protected static final Resume RESUME_2 = new Resume(UUID_2, "Chris Turk");
 
     protected static final String UUID_3 = "uuid3";
-    protected static final Resume RESUME_3 = new Resume(UUID_3);
+    protected static final Resume RESUME_3 = new Resume(UUID_3, "Doctor Cox");
 
     protected static final String UUID_4 = "uuid4";
-    protected static final Resume RESUME_4 = new Resume(UUID_4);
+    protected static final Resume RESUME_4 = new Resume(UUID_4, "Elliot Reid");
 
     public AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -63,7 +64,7 @@ public abstract class AbstractStorageTest {
     public void saveWithOverflow() {
         try {
             for (int i = storage.size(); i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume(i + ""));
+                storage.save(new Resume(i + "", "NewName"));
             }
         } catch (StorageException e) {
             fail("ERROR: Failed to add Resume");
@@ -73,7 +74,7 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void update() {
-        Resume newResume = new Resume(UUID_1);
+        Resume newResume = new Resume(UUID_1, "NewName");
         storage.update(newResume);
         assertEquals(newResume, storage.get(UUID_1));
     }
@@ -107,9 +108,8 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() {
-        Resume[] allResume = {RESUME_1, RESUME_2, RESUME_3};
-        System.out.println(storage.getAll());
-        assertArrayEquals(allResume, storage.getAll());
+        Resume[] allResume = {RESUME_2, RESUME_3, RESUME_1};
+        assertArrayEquals(allResume, storage.getAllSorted().toArray());
     }
 
     protected void assertSize(int size) {

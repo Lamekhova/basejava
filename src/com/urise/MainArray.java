@@ -3,7 +3,7 @@ package com.urise;
 import com.urise.model.Resume;
 import com.urise.storage.ArrayStorage;
 import com.urise.storage.Storage;
-
+import java.util.List;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,7 +36,7 @@ public class MainArray {
                     System.out.println(ARRAY_STORAGE.size());
                     break;
                 case "save":
-                    r = new Resume(uuid);
+                    r = new Resume(uuid, "Ivan");
                     ARRAY_STORAGE.save(r);
                     printAll();
                     break;
@@ -61,15 +61,11 @@ public class MainArray {
     }
 
     static void printAll() {
-        Resume[] all = ARRAY_STORAGE.getAll();
+        List<Resume> all = ARRAY_STORAGE.getAllSorted();
         System.out.println("----------------------------");
-        if (all.length == 0) {
-            System.out.println("Empty");
-        } else {
-            for (Resume r : all) {
-                System.out.println(r);
+            for (Resume element : all) {
+                System.out.println(element);
             }
-        }
         System.out.println("----------------------------");
     }
 }
