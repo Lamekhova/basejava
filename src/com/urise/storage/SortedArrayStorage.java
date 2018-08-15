@@ -1,7 +1,6 @@
 package com.urise.storage;
 
 import com.urise.model.Resume;
-
 import java.util.Arrays;
 import java.util.Comparator;
 

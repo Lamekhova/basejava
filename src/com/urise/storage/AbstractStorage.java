@@ -3,6 +3,8 @@ package com.urise.storage;
 import com.urise.exception.ExistStorageExeption;
 import com.urise.exception.NotExistStorageExeption;
 import com.urise.model.Resume;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class AbstractStorage implements Storage{
 
@@ -15,6 +17,8 @@ public abstract class AbstractStorage implements Storage{
     protected abstract void doDelete(Object searchKey);
 
     protected abstract Resume doGet(Object searchKey);
+
+    public abstract List<Resume> getAll();
 
     protected abstract boolean isExist(Object searchKey);
 
@@ -54,4 +58,12 @@ public abstract class AbstractStorage implements Storage{
         }
         return searchKey;
     }
+
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> allResume = getAll();
+        Collections.sort(allResume);
+        return allResume;
+    }
+
 }

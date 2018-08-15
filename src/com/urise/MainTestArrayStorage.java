@@ -4,9 +4,6 @@ import com.urise.model.Resume;
 import com.urise.storage.SortedArrayStorage;
 import com.urise.storage.Storage;
 
-/**
- * Test for com.urise.webapp.storage.com.urise.storage.ArrayStorage
- */
 public class MainTestArrayStorage {
     private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
@@ -34,7 +31,7 @@ public class MainTestArrayStorage {
         System.out.println("Size: " + ARRAY_STORAGE.size());
     }
 
-    static void printAll() {
+    private static void printAll() {
         System.out.println("\nGet All");
         for (Resume r : ARRAY_STORAGE.getAllSorted()) {
             System.out.println(r);

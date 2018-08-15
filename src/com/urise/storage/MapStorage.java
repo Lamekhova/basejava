@@ -5,7 +5,7 @@ import java.util.*;
 
 public class MapStorage extends AbstractStorage {
 
-    protected Map<String, Resume> mapStorage = new HashMap();
+    private Map<String, Resume> mapStorage = new HashMap<>();
 
     @Override
     public int size() {
@@ -15,14 +15,6 @@ public class MapStorage extends AbstractStorage {
     @Override
     public void clear() {
         mapStorage.clear();
-    }
-
-    @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> allResume = new ArrayList();
-        allResume.addAll(mapStorage.values());
-        Collections.sort(allResume);
-        return allResume;
     }
 
     @Override
@@ -47,6 +39,11 @@ public class MapStorage extends AbstractStorage {
     @Override
     public Resume doGet(Object searchKey) {
         return mapStorage.get(searchKey);
+    }
+
+    @Override
+    public List<Resume> getAll() {
+        return new ArrayList<>(mapStorage.values());
     }
 
     @Override

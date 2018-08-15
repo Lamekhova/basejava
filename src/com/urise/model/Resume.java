@@ -1,6 +1,6 @@
 package com.urise.model;
 
-import java.util.Comparator;
+import java.util.UUID;
 
 public class Resume implements Comparable<Resume>{
 
@@ -8,6 +8,11 @@ public class Resume implements Comparable<Resume>{
     private final String uuid;
     private String fullName;
 
+    public Resume(String fullName) {
+        this.fullName = fullName;
+        uuid = UUID.randomUUID().toString();
+    }
+    
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
@@ -28,12 +33,15 @@ public class Resume implements Comparable<Resume>{
 
         Resume resume = (Resume) o;
 
-        return uuid.equals(resume.uuid);
+        if (!uuid.equals(resume.uuid)) return false;
+        return fullName.equals(resume.fullName);
     }
 
     @Override
     public int hashCode() {
-        return uuid.hashCode();
+        int result = uuid.hashCode();
+        result = 31 * result + fullName.hashCode();
+        return result;
     }
 
     @Override
@@ -43,12 +51,7 @@ public class Resume implements Comparable<Resume>{
 
     @Override
     public int compareTo(Resume o) {
-        if (null == o) {
-            return 1;
-        }
-        return Comparator
-                .comparing(Resume::getFullName)
-                .thenComparing(Resume::getUuid)
-                .compare(this, o);
+        int result = this.fullName.compareTo(o.fullName);
+        return result != 0 ? result : uuid.compareTo(o.uuid);
     }
 }

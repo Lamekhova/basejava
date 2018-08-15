@@ -2,12 +2,11 @@ package com.urise.storage;
 
 import com.urise.exception.ExistStorageExeption;
 import com.urise.exception.NotExistStorageExeption;
-import com.urise.exception.StorageException;
 import com.urise.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
 
 public abstract class AbstractStorageTest {
 
@@ -60,18 +59,6 @@ public abstract class AbstractStorageTest {
         storage.save(RESUME_1);
     }
 
-    @Test(expected = StorageException.class)
-    public void saveWithOverflow() {
-        try {
-            for (int i = storage.size(); i < AbstractArrayStorage.STORAGE_LIMIT; i++) {
-                storage.save(new Resume(i + "", "NewName"));
-            }
-        } catch (StorageException e) {
-            fail("ERROR: Failed to add Resume");
-        }
-        storage.save(RESUME_4);
-    }
-
     @Test
     public void update() {
         Resume newResume = new Resume(UUID_1, "NewName");
@@ -81,7 +68,8 @@ public abstract class AbstractStorageTest {
 
     @Test(expected = NotExistStorageExeption.class)
     public void updateNotExist() {
-        storage.get(UUID_4);
+        Resume newResume = new Resume(UUID_4, "Fake");
+        storage.update(newResume);
     }
 
     @Test
@@ -108,11 +96,14 @@ public abstract class AbstractStorageTest {
 
     @Test
     public void getAll() {
-        Resume[] allResume = {RESUME_2, RESUME_3, RESUME_1};
-        assertArrayEquals(allResume, storage.getAllSorted().toArray());
+        ArrayList<Resume> allResume = new ArrayList<>();
+        allResume.add(RESUME_1);
+        allResume.add(RESUME_2);
+        allResume.add(RESUME_3);
+        assertEquals(allResume, storage.getAllSorted());
     }
 
-    protected void assertSize(int size) {
+    void assertSize(int size) {
         assertEquals(size, storage.size());
     }
 }

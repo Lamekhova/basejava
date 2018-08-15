@@ -60,7 +60,7 @@ public class MainArray {
         }
     }
 
-    static void printAll() {
+    private static void printAll() {
         List<Resume> all = ARRAY_STORAGE.getAllSorted();
         System.out.println("----------------------------");
             for (Resume element : all) {

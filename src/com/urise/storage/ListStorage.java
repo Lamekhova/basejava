@@ -1,14 +1,12 @@
 package com.urise.storage;
 
 import com.urise.model.Resume;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ListStorage extends AbstractStorage{
 
-    protected List<Resume> listStorage = new ArrayList();
+    private List<Resume> listStorage = new ArrayList<>();
 
     @Override
     public int size() {
@@ -22,9 +20,7 @@ public class ListStorage extends AbstractStorage{
 
     @Override
     public List<Resume> getAllSorted() {
-        List<Resume> allResume = new ArrayList();
-        allResume.addAll(listStorage);
-        Collections.sort(allResume);
+        List<Resume> allResume = new ArrayList<>(listStorage);
         return allResume;
     }
 
@@ -55,6 +51,11 @@ public class ListStorage extends AbstractStorage{
     @Override
     public Resume doGet(Object searchKey) {
         return listStorage.get((Integer) searchKey);
+    }
+
+    @Override
+    public List<Resume> getAll() {
+        return new ArrayList<>(listStorage);
     }
 
     @Override

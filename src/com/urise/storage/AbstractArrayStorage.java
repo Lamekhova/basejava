@@ -2,10 +2,8 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractArrayStorage extends AbstractStorage {
@@ -30,9 +28,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     public List<Resume> getAllSorted() {
-        List<Resume> allResume = new ArrayList<>();
-        allResume.addAll(Arrays.asList(Arrays.copyOfRange(storage, 0, size)));
-        Collections.sort(allResume);
+        List<Resume> allResume = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(storage, 0, size)));
         return allResume;
     }
 
@@ -63,6 +59,11 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     @Override
     public Resume doGet(Object searchKey) {
         return storage[(Integer) searchKey];
+    }
+
+    @Override
+    public List<Resume> getAll() {
+        return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 
     @Override
