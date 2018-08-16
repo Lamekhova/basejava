@@ -18,7 +18,7 @@ public abstract class AbstractStorage implements Storage{
 
     protected abstract Resume doGet(Object searchKey);
 
-    public abstract List<Resume> getAll();
+    public abstract List<Resume> doGetAllSorted();
 
     protected abstract boolean isExist(Object searchKey);
 
@@ -43,6 +43,13 @@ public abstract class AbstractStorage implements Storage{
         return doGet(searchKey);
     }
 
+    @Override
+    public List<Resume> getAllSorted() {
+        List<Resume> allResume = doGetAllSorted();
+        Collections.sort(allResume);
+        return allResume;
+    }
+
     public Object getExistSearchKey(String uuid) {
         Object searchKey = getSearchKey(uuid);
         if (!isExist(searchKey)) {
@@ -57,13 +64,6 @@ public abstract class AbstractStorage implements Storage{
             throw new ExistStorageExeption(uuid);
         }
         return searchKey;
-    }
-
-    @Override
-    public List<Resume> getAllSorted() {
-        List<Resume> allResume = getAll();
-        Collections.sort(allResume);
-        return allResume;
     }
 
 }

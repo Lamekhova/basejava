@@ -13,7 +13,7 @@ public class MapStorageTest extends AbstractStorageTest{
     }
 
     @Test
-    public void getAll() {
+    public void getAllSorted() {
         Set<Resume> allResume = new HashSet<>(storage.getAllSorted());
         assertTrue(allResume.contains(RESUME_1));
         assertTrue(allResume.contains(RESUME_2));

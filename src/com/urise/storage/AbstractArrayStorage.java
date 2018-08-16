@@ -2,7 +2,6 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,11 +24,6 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
         Arrays.fill(storage, 0, size, null);
         size = 0;
         System.out.println("Storage was cleaned");
-    }
-
-    public List<Resume> getAllSorted() {
-        List<Resume> allResume = new ArrayList<>(Arrays.asList(Arrays.copyOfRange(storage, 0, size)));
-        return allResume;
     }
 
     @Override
@@ -62,7 +56,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public List<Resume> getAll() {
+    public List<Resume> doGetAllSorted() {
         return Arrays.asList(Arrays.copyOfRange(storage, 0, size));
     }
 

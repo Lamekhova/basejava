@@ -5,8 +5,9 @@ import com.urise.exception.NotExistStorageExeption;
 import com.urise.model.Resume;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
+import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
 
@@ -31,9 +32,9 @@ public abstract class AbstractStorageTest {
     @Before
     public void setUp() {
         storage.clear();
+        storage.save(RESUME_3);
         storage.save(RESUME_1);
         storage.save(RESUME_2);
-        storage.save(RESUME_3);
     }
 
     @Test
@@ -92,15 +93,13 @@ public abstract class AbstractStorageTest {
     @Test(expected = NotExistStorageExeption.class)
     public void deleteNotExist() {
         storage.delete(UUID_4);
+        assertSize(3);
     }
 
     @Test
-    public void getAll() {
-        ArrayList<Resume> allResume = new ArrayList<>();
-        allResume.add(RESUME_1);
-        allResume.add(RESUME_2);
-        allResume.add(RESUME_3);
-        assertEquals(allResume, storage.getAllSorted());
+    public void getAllSorted() {
+        assertTrue(storage.getAllSorted().containsAll(Arrays.asList(RESUME_1, RESUME_2, RESUME_3)));
+        assertSize(3);
     }
 
     void assertSize(int size) {
