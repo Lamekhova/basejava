@@ -10,7 +10,7 @@ import static org.junit.runners.Suite.*;
                 ArrayStorageTest.class,
                 SortedArrayStorageTest.class,
                 ListStorageTest.class,
-                MapStorageTest.class
+                MapUuidStorageTest.class
         })
 public class SuiteTestClass {
 }
