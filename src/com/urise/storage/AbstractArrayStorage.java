@@ -5,7 +5,7 @@ import com.urise.model.Resume;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class AbstractArrayStorage extends AbstractStorage {
+public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
 
     protected static final int STORAGE_LIMIT = 10000;
     protected Resume[] storage = new Resume[STORAGE_LIMIT];
@@ -23,36 +23,32 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     public void clear() {
         Arrays.fill(storage, 0, size, null);
         size = 0;
-        System.out.println("Storage was cleaned");
     }
 
     @Override
-    public void doUpdate(Resume resume, Object searchKey) {
-        storage[(Integer) searchKey] = resume;
-        System.out.println("Resume " + resume.getUuid() + " has been updated");
+    public void doUpdate(Resume resume, Integer searchKey) {
+        storage[searchKey] = resume;
     }
 
     @Override
-    public void doSave(Resume resume, Object searchKey) {
+    public void doSave(Resume resume, Integer searchKey) {
         if (size >= storage.length) {
             throw new StorageException("Storage overflow", resume.getUuid());
         }
-        insertElement(resume, (Integer) searchKey);
+        insertElement(resume, searchKey);
         size++;
-        System.out.println("Resume " + resume.getUuid() + " was added in storage");
     }
 
     @Override
-    public void doDelete(Object searchKey) {
-        shiftElement((Integer) searchKey);
+    public void doDelete(Integer searchKey) {
+        shiftElement(searchKey);
         storage[size - 1] = null;
         size--;
-        System.out.println("Resume " + searchKey.toString() + " has been deleted");
     }
 
     @Override
-    public Resume doGet(Object searchKey) {
-        return storage[(Integer) searchKey];
+    public Resume doGet(Integer searchKey) {
+        return storage[searchKey];
     }
 
     @Override
@@ -61,8 +57,8 @@ public abstract class AbstractArrayStorage extends AbstractStorage {
     }
 
     @Override
-    public boolean isExist(Object searchKey) {
-        return (Integer) searchKey >= 0;
+    public boolean isExist(Integer searchKey) {
+        return searchKey >= 0;
     }
 
 }

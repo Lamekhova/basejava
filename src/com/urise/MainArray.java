@@ -63,9 +63,9 @@ public class MainArray {
     private static void printAll() {
         List<Resume> all = ARRAY_STORAGE.getAllSorted();
         System.out.println("----------------------------");
-            for (Resume element : all) {
-                System.out.println(element);
-            }
+        for (Resume element : all) {
+            System.out.println(element);
+        }
         System.out.println("----------------------------");
     }
 }

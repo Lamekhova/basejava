@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MapResumeStorage extends AbstractStorage {
+public class MapResumeStorage extends AbstractStorage<Resume> {
 
     private Map<String, Resume> mapResumeStorage = new HashMap<>();
 
@@ -26,23 +26,23 @@ public class MapResumeStorage extends AbstractStorage {
     }
 
     @Override
-    public void doUpdate(Resume resume, Object searchKeyResume) {
+    public void doUpdate(Resume resume, Resume searchKeyResume) {
         mapResumeStorage.put(resume.getUuid(), resume);
     }
 
     @Override
-    public void doSave(Resume resume, Object searchKeyResume) {
+    public void doSave(Resume resume, Resume searchKeyResume) {
         mapResumeStorage.put(resume.getUuid(), resume);
     }
 
     @Override
-    public void doDelete(Object searchKeyResume) {
-        mapResumeStorage.remove(((Resume) searchKeyResume).getUuid());
+    public void doDelete(Resume searchKeyResume) {
+        mapResumeStorage.remove((searchKeyResume).getUuid());
     }
 
     @Override
-    public Resume doGet(Object searchKeyResume) {
-        return mapResumeStorage.get(((Resume) searchKeyResume).getUuid());
+    public Resume doGet(Resume searchKeyResume) {
+        return mapResumeStorage.get((searchKeyResume).getUuid());
     }
 
     @Override
@@ -51,7 +51,7 @@ public class MapResumeStorage extends AbstractStorage {
     }
 
     @Override
-    public boolean isExist(Object searchKeyResume) {
+    public boolean isExist(Resume searchKeyResume) {
         return mapResumeStorage.containsValue(searchKeyResume);
     }
 

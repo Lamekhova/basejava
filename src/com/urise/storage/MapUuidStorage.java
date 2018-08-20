@@ -3,7 +3,7 @@ package com.urise.storage;
 import com.urise.model.Resume;
 import java.util.*;
 
-public class MapUuidStorage extends AbstractStorage {
+public class MapUuidStorage extends AbstractStorage<String> {
 
     private Map<String, Resume> mapUuidStorage = new HashMap<>();
 
@@ -18,27 +18,27 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    public Object getSearchKey(String uuid) {
+    public String getSearchKey(String uuid) {
         return uuid;
     }
 
     @Override
-    public void doUpdate(Resume resume, Object searchKeyUuid) {
-        mapUuidStorage.put(String.valueOf(searchKeyUuid), resume);
+    public void doUpdate(Resume resume, String searchKeyUuid) {
+        mapUuidStorage.put(searchKeyUuid, resume);
     }
 
     @Override
-    public void doSave(Resume resume, Object searchKeyUuid) {
-        mapUuidStorage.put(String.valueOf(searchKeyUuid), resume);
+    public void doSave(Resume resume, String searchKeyUuid) {
+        mapUuidStorage.put(searchKeyUuid, resume);
     }
 
     @Override
-    public void doDelete(Object searchKeyUuid) {
+    public void doDelete(String searchKeyUuid) {
         mapUuidStorage.remove(searchKeyUuid);
     }
 
     @Override
-    public Resume doGet(Object searchKeyUuid) {
+    public Resume doGet(String searchKeyUuid) {
         return mapUuidStorage.get(searchKeyUuid);
     }
 
@@ -48,7 +48,7 @@ public class MapUuidStorage extends AbstractStorage {
     }
 
     @Override
-    public boolean isExist(Object searchKeyUuid) {
+    public boolean isExist(String searchKeyUuid) {
         return mapUuidStorage.containsKey(searchKeyUuid);
     }
 
