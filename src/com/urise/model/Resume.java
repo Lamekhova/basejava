@@ -7,13 +7,10 @@ public class Resume implements Comparable<Resume> {
     private final String uuid;
     private String fullName;
 
-    private static  final List<SectionType> ORDER_OF_SECTION_TYPES = Arrays.asList(SectionType.PERSONAL, SectionType.OBJECTIVE,
-            SectionType.ACHIEVEMENT, SectionType.QUALIFICATION, SectionType.EXPERIENCE, SectionType.EDUCATION);
-    private static  final List<ContactType> ORDER_OF_CONTACT_TYPES = Arrays.asList(ContactType.TELEPHONE, ContactType.SKYPE,
-            ContactType.EMAIL, ContactType.LINKEDIN, ContactType.GITHUB, ContactType.STACKOVERFLOW,
-            ContactType.HOMEPAGE);
+    private static  final List<ContactType> ORDER_OF_CONTACT_TYPES = Arrays.asList(ContactType.class.getEnumConstants());
+    private static  final List<SectionType> ORDER_OF_SECTION_TYPES = Arrays.asList(SectionType.class.getEnumConstants());
 
-    private Map<SectionType, Section> resumeSection = new HashMap<>();
+    private Map<SectionType, SectionBody> resumeSection = new HashMap<>();
     private Map<ContactType, String> resumeContact = new HashMap<>();
 
     public Resume(String fullName) {
@@ -62,13 +59,12 @@ public class Resume implements Comparable<Resume> {
         stringBuilder.append("\n");
 
         for (SectionType element : ORDER_OF_SECTION_TYPES) {
-            Section section = resumeSection.get(element);
-            if (section != null) {
-                section.getSectionBody().setPrefix("\t");
-                stringBuilder.append(element.getTitle() + "\n" + section.getSectionBody() + "\n");
+            SectionBody sectionBody = resumeSection.get(element);
+            if (sectionBody != null) {
+                sectionBody.setPrefix("\t");
+                stringBuilder.append(element.getTitle() + "\n" + sectionBody + "\n");
             }
         }
-
         return stringBuilder.toString();
     }
 
@@ -78,11 +74,11 @@ public class Resume implements Comparable<Resume> {
         return result != 0 ? result : uuid.compareTo(o.uuid);
     }
 
-    public void addSection(Section section) {
-        resumeSection.put(section.getSectionType(), section);
+    public void addSection(SectionType sectionType, SectionBody sectionBody) {
+        resumeSection.put(sectionType, sectionBody);
     }
 
-    public void addContact(Contact contact) {
-        resumeContact.put(contact.getContactType(), contact.getContactBody());
+    public void addContact(ContactType contactType, String contact) {
+        resumeContact.put(contactType, contact);
     }
 }

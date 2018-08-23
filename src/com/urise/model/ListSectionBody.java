@@ -4,11 +4,10 @@ import java.util.*;
 
 public class ListSectionBody extends SectionBody {
 
-    private List<String> stringList;
-    private String prefix;
+    private List<String> sectionBody;
 
     public ListSectionBody(List<String> sections) {
-        this.stringList = new ArrayList<>(sections);
+        this.sectionBody = new ArrayList<>(sections);
     }
 
     public void setPrefix(String prefix) {
@@ -17,10 +16,10 @@ public class ListSectionBody extends SectionBody {
 
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        for (String string : stringList) {
-            stringBuffer.append((prefix != null ? prefix : "") + string + "\n");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String string : sectionBody) {
+            stringBuilder.append((prefix != null ? prefix : "") + string + "\n");
         }
-        return stringBuffer.toString();
+        return stringBuilder.toString();
     }
 }
