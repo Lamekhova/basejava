@@ -1,6 +1,7 @@
 package com.urise.model;
 
 public enum SectionType {
+
     PERSONAL("Личные качества"),
     OBJECTIVE("Позиция"),
     ACHIEVEMENT("Достижение"),

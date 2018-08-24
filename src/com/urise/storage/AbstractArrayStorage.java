@@ -60,5 +60,4 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Integer> {
     public boolean isExist(Integer searchKey) {
         return searchKey >= 0;
     }
-
 }

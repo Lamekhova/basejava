@@ -10,7 +10,6 @@ public class TextSectionBody extends SectionBody {
 
     @Override
     public String toString() {
-        return (this.prefix != null ? this.prefix : "") + sectionBody + "\n";
+        return sectionBody;
     }
-
 }

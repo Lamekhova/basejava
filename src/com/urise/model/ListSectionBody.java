@@ -10,16 +10,8 @@ public class ListSectionBody extends SectionBody {
         this.sectionBody = new ArrayList<>(sections);
     }
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String string : sectionBody) {
-            stringBuilder.append((prefix != null ? prefix : "") + string + "\n");
-        }
-        return stringBuilder.toString();
+        return sectionBody.toString();
     }
 }

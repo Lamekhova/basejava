@@ -30,5 +30,4 @@ public interface Storage {
 
     // Delete resume from storage
     void delete(String uuid);
-
 }

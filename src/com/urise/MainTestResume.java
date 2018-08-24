@@ -27,7 +27,7 @@ public class MainTestResume {
         resume.addSection(SectionType.QUALIFICATION, new ListSectionBody(Arrays.asList(
                 "JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2")));
         Organization experience1 = new Organization(
-                "RIT Center",
+                "RIT Center", null,
                 YearMonth.of(2015, Month.FEBRUARY),
                 YearMonth.of(2018, Month.APRIL),
                 "Java архитектор",
@@ -35,7 +35,7 @@ public class MainTestResume {
                         "версионирование, ведение CI (Jenkins), миграция базы (кастомизация Flyway), конфигурирование " +
                         "системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы.");
         Organization experience2 = new Organization(
-                "Wrike",
+                "Wrike", null,
                 YearMonth.of(2013, Month.FEBRUARY),
                 YearMonth.of(2015, Month.APRIL),
                 "Старший разработчик (backend)",
@@ -46,12 +46,12 @@ public class MainTestResume {
         resume.addSection(SectionType.EXPERIENCE, new OrganizationSectionBody(Arrays.asList(experience1, experience2)));
 
         Organization education1 = new Organization(
-                "Coursera",
+                "Coursera", "https://www.coursera.org/",
                 YearMonth.of(2011, Month.JULY),
                 YearMonth.of(2011, Month.SEPTEMBER),
                 "Functional Programming Principles in Scala", null);
         Organization education2 = new Organization(
-                "Udemy",
+                "Udemy", "https://www.udemy.com/",
                 YearMonth.of(2011, Month.JULY),
                 YearMonth.of(2011, Month.SEPTEMBER),
                 "Functional Programming Principles in Scala", null);

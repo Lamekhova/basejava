@@ -73,5 +73,4 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
         }
         return searchKey;
     }
-
 }

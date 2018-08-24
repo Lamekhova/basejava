@@ -1,6 +1,7 @@
 package com.urise.model;
 
 public enum ContactType {
+
     TELEPHONE("Номер телефона"),
     SKYPE("Скайп"),
     EMAIL("Электронная почта"),
@@ -15,7 +16,8 @@ public enum ContactType {
         this.title = title;
     }
 
-    public String getTitle() {
+    @Override
+    public String toString() {
         return title;
     }
 }

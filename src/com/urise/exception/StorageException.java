@@ -1,8 +1,8 @@
 package com.urise.exception;
 
 public class StorageException extends RuntimeException {
-    private final String uuid;
 
+    private final String uuid;
 
     public StorageException(String message, String uuid) {
         super(message);

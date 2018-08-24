@@ -12,5 +12,6 @@ import static org.junit.runners.Suite.*;
                 ListStorageTest.class,
                 MapUuidStorageTest.class
         })
+
 public class SuiteTestClass {
 }

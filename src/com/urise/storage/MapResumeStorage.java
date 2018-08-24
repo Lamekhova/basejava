@@ -54,6 +54,4 @@ public class MapResumeStorage extends AbstractStorage<Resume> {
     public boolean isExist(Resume searchKeyResume) {
         return mapResumeStorage.containsValue(searchKeyResume);
     }
-
-
 }

@@ -12,6 +12,7 @@ import java.io.InputStreamReader;
  * Test for com.urise.webapp.storage.com.urise.storage.ArrayStorage
  */
 public class MainArray {
+
     private final static Storage ARRAY_STORAGE = new ArrayStorage();
 
     public static void main(String[] args) throws IOException {

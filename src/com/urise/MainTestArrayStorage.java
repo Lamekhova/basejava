@@ -5,6 +5,7 @@ import com.urise.storage.SortedArrayStorage;
 import com.urise.storage.Storage;
 
 public class MainTestArrayStorage {
+
     private static final Storage ARRAY_STORAGE = new SortedArrayStorage();
 
     public static void main(String[] args) {

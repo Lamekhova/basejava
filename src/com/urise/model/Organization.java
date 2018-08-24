@@ -5,19 +5,17 @@ import java.util.Objects;
 
 public class Organization {
 
-    protected String name;
+    private Link name;
     private YearMonth startDate;
     private YearMonth endDate;
     private String title;
     private String description;
 
-    public Organization(String organizationName, YearMonth startDate, YearMonth endDate, String title, String description) {
-        Objects.requireNonNull(organizationName);
+    public Organization(String name, String url, YearMonth startDate, YearMonth endDate, String title, String description) {
         Objects.requireNonNull(startDate);
         Objects.requireNonNull(endDate);
         Objects.requireNonNull(title);
-
-        this.name = organizationName;
+        this.name = new Link(name, url);
         this.startDate = startDate;
         this.endDate = endDate;
         this.title = title;

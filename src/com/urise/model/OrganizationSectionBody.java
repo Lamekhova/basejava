@@ -12,10 +12,6 @@ public class OrganizationSectionBody extends SectionBody {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (Organization element : organizations) {
-            stringBuilder.append((prefix != null ? prefix : "") + element + "\n");
-        }
-        return stringBuilder.toString();
+        return organizations.toString();
     }
 }
