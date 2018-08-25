@@ -1,6 +1,6 @@
 package com.urise.model;
 
-public class TextSectionBody extends SectionBody {
+public class TextSectionBody implements SectionBody {
 
     private String sectionBody;
 

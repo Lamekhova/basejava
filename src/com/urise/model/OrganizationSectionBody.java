@@ -2,7 +2,7 @@ package com.urise.model;
 
 import java.util.List;
 
-public class OrganizationSectionBody extends SectionBody {
+public class OrganizationSectionBody implements SectionBody {
 
     private List<Organization> organizations;
 

@@ -23,8 +23,13 @@ public class Resume implements Comparable<Resume> {
         return uuid;
     }
 
-    public String getFullName() {
-        return fullName;
+
+    public void addSection(SectionType sectionType, SectionBody sectionBody) {
+        resumeSection.put(sectionType, sectionBody);
+    }
+
+    public void addContact(ContactType contactType, String contact) {
+        resumeContact.put(contactType, contact);
     }
 
     @Override
@@ -57,13 +62,5 @@ public class Resume implements Comparable<Resume> {
     public int compareTo(Resume o) {
         int result = fullName.compareTo(o.fullName);
         return result != 0 ? result : uuid.compareTo(o.uuid);
-    }
-
-    public void addSection(SectionType sectionType, SectionBody sectionBody) {
-        resumeSection.put(sectionType, sectionBody);
-    }
-
-    public void addContact(ContactType contactType, String contact) {
-        resumeContact.put(contactType, contact);
     }
 }
