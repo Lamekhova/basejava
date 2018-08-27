@@ -3,7 +3,7 @@ package com.urise.model;
 import java.time.YearMonth;
 import java.util.Objects;
 
-public class Organization {
+public class Organization{
 
     private Link name;
     private YearMonth startDate;
