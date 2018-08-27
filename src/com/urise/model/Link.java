@@ -13,6 +13,10 @@ public class Link {
         this.url = url;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "\n" + name + " " + url;

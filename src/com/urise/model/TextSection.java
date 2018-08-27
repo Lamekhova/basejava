@@ -1,10 +1,10 @@
 package com.urise.model;
 
-public class TextSectionBody implements SectionBody {
+public class TextSection implements Section {
 
     private String sectionBody;
 
-    public TextSectionBody(String sectionBody) {
+    public TextSection(String sectionBody) {
         this.sectionBody = sectionBody;
     }
 

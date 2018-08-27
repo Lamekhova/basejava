@@ -8,7 +8,7 @@ public class Resume implements Comparable<Resume> {
     private String fullName;
 
     private Map<ContactType, String> resumeContact = new EnumMap<>(ContactType.class);
-    private Map<SectionType, SectionBody> resumeSection = new EnumMap<>(SectionType.class);
+    private Map<SectionType, Section> resumeSection = new EnumMap<>(SectionType.class);
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
@@ -24,8 +24,8 @@ public class Resume implements Comparable<Resume> {
     }
 
 
-    public void addSection(SectionType sectionType, SectionBody sectionBody) {
-        resumeSection.put(sectionType, sectionBody);
+    public void addSection(SectionType sectionType, Section section) {
+        resumeSection.put(sectionType, section);
     }
 
     public void addContact(ContactType contactType, String contact) {
@@ -50,10 +50,10 @@ public class Resume implements Comparable<Resume> {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(fullName);
         for (Map.Entry element : resumeContact.entrySet()){
-            stringBuilder.append("\n" + element.getKey() + ": " + element.getValue());
+            stringBuilder.append("\n" + element.getKey() + ": \n" + element.getValue() + "\n");
         }
         for (Map.Entry element : resumeSection.entrySet()){
-            stringBuilder.append("\n" + element.getKey() + ": " + element.getValue());
+            stringBuilder.append("\n" + element.getKey() + ": \n" + element.getValue());
         }
         return stringBuilder.toString();
     }

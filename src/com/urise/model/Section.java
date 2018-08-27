@@ -1,5 +1,5 @@
 package com.urise.model;
 
-interface SectionBody {
+interface Section {
 
 }

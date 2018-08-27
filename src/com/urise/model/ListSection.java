@@ -2,11 +2,11 @@ package com.urise.model;
 
 import java.util.*;
 
-public class ListSectionBody implements SectionBody {
+public class ListSection implements Section {
 
     private List<String> sections;
 
-    public ListSectionBody(List<String> sections) {
+    public ListSection(List<String> sections) {
         this.sections = sections;
     }
 
