@@ -15,6 +15,7 @@ public class ExperienceEntry {
 
     public ExperienceEntry(String name, String url, List<Position> positionsList) {
         Objects.requireNonNull(name);
+        Objects.requireNonNull(positionsList);
         this.name = new Link(name, url);
         this.positionsList = positionsList;
     }

@@ -35,4 +35,9 @@ public class Position {
     public int hashCode() {
         return Objects.hash(startDate, endDate, title, description);
     }
+
+    @Override
+    public String toString() {
+        return startDate + " - " + endDate + "\t" + title + "\n" + description + "\n";
+    }
 }

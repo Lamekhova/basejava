@@ -4,31 +4,30 @@ import java.util.*;
 
 public class ExperienceSection implements Section {
 
-    private Map<String, List<ExperienceEntry>> experienceMap;
+    private List<ExperienceEntry> experienceEntries;
 
     public ExperienceSection(List<ExperienceEntry> experienceEntries) {
-        this.experienceMap = new HashMap<>();
-        for (ExperienceEntry element : experienceEntries) {
-            String name = element.getName().getName();
-            if (experienceMap.containsKey(name)) {
-                experienceMap.get(name).add(new Position(element.));
-            }
-            experienceMap.put(name, new Position(element.getTitle(), element.getStartDate(), element.getEndDate()));
-        }
+        Objects.requireNonNull(experienceEntries);
+        this.experienceEntries = experienceEntries;
+
     }
 
-//    @Override
-//    public String toString() {
-//        StringBuilder stringBuilder = new StringBuilder();
-//        for (Map.Entry<String, Set<ExperienceEntry>> element : experienceMap.entrySet()) {
-//            Set<ExperienceEntry> setExpEntry = element.getValue();
-//            for (ExperienceEntry expEntry : setExpEntry) {
-//                stringBuilder.append(element.getKey() + "\n"+ expEntry.getStartDate()+ "/" + expEntry.getEndDate() +
-//                        "\t" + expEntry.getTitle() + "\n" +
-//                        "\t\t\t\t" + expEntry.getDescription());
-//            }
-//            stringBuilder.append("\n");
-//        }
-//        return stringBuilder.toString();
-//    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExperienceSection that = (ExperienceSection) o;
+        return Objects.equals(experienceEntries, that.experienceEntries);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(experienceEntries);
+    }
+
+    @Override
+    public String toString() {
+        return experienceEntries.toString();
+    }
 }
