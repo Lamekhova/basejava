@@ -1,6 +1,6 @@
 package com.urise.model;
 
-import java.time.YearMonth;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -11,47 +11,35 @@ import java.util.Objects;
 public class ExperienceEntry {
 
     private Link name;
-    private YearMonth startDate;
-    private YearMonth endDate;
-    private String title;
-    private String description;
+    private List<Position> positionsList;
 
-    public ExperienceEntry(String name, String url, YearMonth startDate, YearMonth endDate, String title, String description) {
-        Objects.requireNonNull(startDate);
-        Objects.requireNonNull(endDate);
-        Objects.requireNonNull(title);
+    public ExperienceEntry(String name, String url, List<Position> positionsList) {
+        Objects.requireNonNull(name);
         this.name = new Link(name, url);
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.title = title;
-        this.description = description;
+        this.positionsList = positionsList;
     }
 
     public Link getName() {
         return name;
     }
 
-    public YearMonth getStartDate() {
-        return startDate;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExperienceEntry that = (ExperienceEntry) o;
+        return Objects.equals(name, that.name) &&
+                Objects.equals(positionsList, that.positionsList);
     }
 
-    public YearMonth getEndDate() {
-        return endDate;
-    }
+    @Override
+    public int hashCode() {
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
+        return Objects.hash(name, positionsList);
     }
 
     @Override
     public String toString() {
-        return name + "\n" +
-                startDate.getMonthValue() + "/" + startDate.getYear() + " - " +
-                endDate.getMonthValue() + "/" + endDate.getYear() + "\t" + title + "\n" +
-                "\t\t\t\t" + description;
+        return name + "\n" + positionsList.toString();
     }
 }

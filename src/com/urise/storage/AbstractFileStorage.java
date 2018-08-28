@@ -41,7 +41,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     protected void doSave(Resume resume, File file) {
         try {
             file.createNewFile();
-            doWrite(resume, file);
+            doUpdate(resume, file);
         } catch (IOException e) {
             throw new StorageException("IO Exeption", file.getName(), e);
         }
@@ -70,11 +70,7 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
     @Override
     public List<Resume> getAllSorted() {
         ArrayList<Resume> listResume = new ArrayList<>();
-        File[] listFile = directory.listFiles();
-        if (listFile == null) {
-            throw new StorageException("Error size directory", directory.getName());
-        }
-        for (File element : listFile) {
+        for (File element : getAllFiles(directory)) {
                 listResume.add(doGet(element));
         }
         return listResume;
@@ -87,23 +83,23 @@ public abstract class AbstractFileStorage extends AbstractStorage<File> {
 
     @Override
     public int size() {
-        File[] listFile = directory.listFiles();
-        if (listFile == null) {
-            throw new StorageException("Error size directory", directory.getName());
-        }
-        return listFile.length;
+        return getAllFiles(directory).length;
     }
 
     @Override
     public void clear() {
-        File[] listFile = directory.listFiles();
-        if (listFile == null) {
-            throw new StorageException("Error clear directory", directory.getName());
-        }
-        for (File element : listFile) {
+        for (File element : getAllFiles(directory)) {
             if (element.isFile()) {
-                element.delete();
+                doDelete(element);
             }
         }
+    }
+
+    public File[] getAllFiles(File directory) {
+        File[] listFile = directory.listFiles();
+        if (listFile == null) {
+            throw new StorageException("Error size directory", directory.getName());
+        }
+        return listFile;
     }
 }
