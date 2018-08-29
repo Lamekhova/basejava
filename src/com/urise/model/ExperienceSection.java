@@ -1,8 +1,10 @@
 package com.urise.model;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
-public class ExperienceSection implements Section {
+public class ExperienceSection extends Section {
+    private final static long serialVersionUID = 1L;
 
     private List<ExperienceEntry> experienceEntries;
 

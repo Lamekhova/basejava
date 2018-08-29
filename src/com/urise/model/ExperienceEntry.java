@@ -1,5 +1,6 @@
 package com.urise.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,7 +9,8 @@ import java.util.Objects;
  * name - name of organization/educational center
  * startDate - start of learning/working
  */
-public class ExperienceEntry {
+public class ExperienceEntry implements Serializable {
+    private final static long serialVersionUID = 1L;
 
     private Link name;
     private List<Position> positionsList;

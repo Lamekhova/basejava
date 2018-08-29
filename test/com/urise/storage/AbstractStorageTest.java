@@ -2,73 +2,63 @@ package com.urise.storage;
 
 import com.urise.exception.ExistStorageExeption;
 import com.urise.exception.NotExistStorageExeption;
-import com.urise.model.Resume;
+import com.urise.model.*;
 import org.junit.Before;
 import org.junit.Test;
+import java.io.File;
+import java.time.YearMonth;
 import java.util.Arrays;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public abstract class AbstractStorageTest {
 
+    protected final static File STORAGE_DIR = new File("C:\\Users\\alamehova\\basejava\\storage_resume");
+
     protected Storage storage;
 
     protected static final String UUID_1 = "uuid1";
     protected static final Resume RESUME_1 = new Resume(UUID_1, "John Dorian");
 
-//    static {
-//        RESUME_1.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
-//        RESUME_1.addContact(ContactType.SKYPE, "aivanov");
-//        RESUME_1.addContact(ContactType.EMAIL, "aivanov@mail.ru");
-//        RESUME_1.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
-//        RESUME_1.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
-//        RESUME_1.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
-//        RESUME_1.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
-//
-//        RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
-//        RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Java junior"));
-//        RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection(Arrays.asList(
-//                "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike.",
-//                "Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.")));
-//        RESUME_1.addSection(SectionType.QUALIFICATION, new ListSection(Arrays.asList(
-//                "JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2")));
-//        ExperienceEntry experience1 = new ExperienceEntry(
-//                "RIT Center", null,
-//                YearMonth.of(2015, Month.FEBRUARY),
-//                YearMonth.of(2018, Month.APRIL),
-//                "Java архитектор",
-//                "Организация процесса разработки системы ERP для разных окружений: релизная политика, " +
-//                        "версионирование, ведение CI (Jenkins), миграция базы (кастомизация Flyway), конфигурирование " +
-//                        "системы (pgBoucer, Nginx), AAA via SSO. Архитектура БД и серверной части системы.");
-//        ExperienceEntry experience2 = new ExperienceEntry(
-//                "Wrike", null,
-//                YearMonth.of(2013, Month.FEBRUARY),
-//                YearMonth.of(2015, Month.APRIL),
-//                "Старший разработчик (backend)",
-//                "Проектирование и разработка онлайн платформы управления проектами Wrike " +
-//                        "(Java 8 API, Maven, Spring, MyBatis, Guava, Vaadin, PostgreSQL, Redis). " +
-//                        "Двухфакторная аутентификация, авторизация по OAuth1, OAuth2, JWT SSO.");
-//        ExperienceEntry experience3 = new ExperienceEntry(
-//                "Wrike", null,
-//                YearMonth.of(2011, Month.FEBRUARY),
-//                YearMonth.of(2013, Month.APRIL),
-//                "Младший разработчик",
-//                "клей момент");
-//        RESUME_1.addSection(SectionType.EXPERIENCE, new ExperienceSection(Arrays.asList(experience1, experience2, experience3)));
-//
-//        ExperienceEntry education1 = new ExperienceEntry(
-//                "Coursera", "https://www.coursera.org/",
-//                YearMonth.of(2011, Month.JULY),
-//                YearMonth.of(2011, Month.SEPTEMBER),
-//                "Functional Programming Principles in Scala", null);
-//        ExperienceEntry education2 = new ExperienceEntry(
-//                "Udemy", "https://www.udemy.com/",
-//                YearMonth.of(2011, Month.JULY),
-//                YearMonth.of(2011, Month.SEPTEMBER),
-//                "Functional Programming Principles in Scala", null);
-//
-//        RESUME_1.addSection(SectionType.EDUCATION, new ExperienceSection(Arrays.asList(education1, education2)));
-//    }
+    static {
+        RESUME_1.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
+        RESUME_1.addContact(ContactType.SKYPE, "aivanov");
+        RESUME_1.addContact(ContactType.EMAIL, "aivanov@mail.ru");
+        RESUME_1.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
+        RESUME_1.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        RESUME_1.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
+        RESUME_1.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
+
+        RESUME_1.addSection(SectionType.PERSONAL, new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
+        RESUME_1.addSection(SectionType.OBJECTIVE, new TextSection("Java junior"));
+        RESUME_1.addSection(SectionType.ACHIEVEMENT, new ListSection(Arrays.asList(
+                "Реализация двухфакторной аутентификации для онлайн платформы управления проектами Wrike.",
+                "Интеграция с Twilio, DuoSecurity, Google Authenticator, Jira, Zendesk.")));
+        RESUME_1.addSection(SectionType.QUALIFICATION, new ListSection(Arrays.asList(
+                "JEE AS: GlassFish (v2.1, v3), OC4J, JBoss, Tomcat, Jetty, WebLogic, WSO2")));
+
+        Position position1 = new Position(
+                YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Java архитектор", null);
+        Position position2 = new Position(
+                YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Старший разработчик (backend)", null);
+        ExperienceEntry experience1 = new ExperienceEntry("RIT Center",null, Arrays.asList(position1, position2));
+
+        Position position3 = new Position(
+                YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Младший разработчик", null);
+        Position position4 = new Position(
+                YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Очень младший разработчик", null);
+        ExperienceEntry experience2 = new ExperienceEntry("Wrike",null, Arrays.asList(position3, position4));
+
+        RESUME_1.addSection(SectionType.EXPERIENCE, new ExperienceSection(Arrays.asList(experience1, experience2)));
+
+        Position education1 = new Position(
+                YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Курсы для продолжающих", null);
+        Position education2 = new Position(
+                YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Курсы для начинающих", null);
+        ExperienceEntry education = new ExperienceEntry("Udemy",null, Arrays.asList(education1, education2));
+        RESUME_1.addSection(SectionType.EDUCATION, new ExperienceSection(Arrays.asList(education)));
+
+    }
 
     protected static final String UUID_2 = "uuid2";
     protected static final Resume RESUME_2 = new Resume(UUID_2, "Chris Turk");

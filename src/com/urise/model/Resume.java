@@ -1,8 +1,10 @@
 package com.urise.model;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Resume implements Comparable<Resume> {
+public class Resume implements Comparable<Resume>, Serializable {
+    private final static long serialVersionUID = 1L;
 
     private final String uuid;
     private String fullName;

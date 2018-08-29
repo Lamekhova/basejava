@@ -1,6 +1,7 @@
 package com.urise.model;
 
-public class TextSection implements Section {
+public class TextSection extends Section {
+    private final static long serialVersionUID = 1L;
 
     private String sectionBody;
 

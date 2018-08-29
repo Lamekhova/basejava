@@ -1,9 +1,11 @@
 package com.urise.model;
 
+import java.io.Serializable;
 import java.time.YearMonth;
 import java.util.Objects;
 
-public class Position {
+public class Position implements Serializable {
+    private final static long serialVersionUID = 1L;
 
     private YearMonth startDate;
     private YearMonth endDate;
