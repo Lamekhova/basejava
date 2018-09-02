@@ -1,22 +1,25 @@
 package com.urise;
 
-import java.io.File;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class MainFile {
-    public static void main(String[] args) {
-        // Обход всех файлов проекта
-        File file = new File("C:\\Users\\alamehova\\basejava");
-        walkFileTree(file);
-    }
+    public static void main(String[] args) throws IOException {
+        // Вывод каталогов с отступом
+        Path root = Paths.get("C:\\Users\\alamehova\\basejava");
+        Files.walkFileTree(root, new SimpleFileVisitor<>() {
 
-    private static void walkFileTree(File file) {
-        File[] folders = file.listFiles();
-        for (File element : folders) {
-            if (element.isDirectory()) {
-                walkFileTree(element);
-            } else {
-                System.out.println("\t" + element.getName());
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) {
+                int count = dir.getNameCount() - root.getNameCount() + 1;
+                count += dir.getFileName().toString().length();
+
+                String text = String.format("%" + count + "s", dir.getFileName());
+                text = text.replaceAll("[\\s]", " ");
+                System.out.println(text);
+                return FileVisitResult.CONTINUE;
             }
-        }
+        });
     }
 }

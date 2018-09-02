@@ -2,11 +2,9 @@ package com.urise.storage;
 
 import com.urise.serialization.ObjectStreamSerializer;
 
-import java.io.File;
+public class ObjectStreamPathStorage extends AbstractPathStorage {
 
-public class ObjectStreamStorage extends AbstractFileStorage {
-
-    public ObjectStreamStorage(File directory) {
+    public ObjectStreamPathStorage(String directory) {
         super(directory);
         this.serializer = new ObjectStreamSerializer();
     }

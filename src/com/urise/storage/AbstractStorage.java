@@ -21,7 +21,7 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
 
     protected abstract Resume doGet(SearchKey searchKey);
 
-    public abstract List<Resume> doGetAllSorted();
+    public abstract List<Resume> doCopyAll();
 
     protected abstract boolean isExist(SearchKey searchKey);
 
@@ -51,9 +51,9 @@ public abstract class AbstractStorage<SearchKey> implements Storage {
     }
 
     @Override
-    public List<Resume> getAllSorted() {
+    public List getAllSorted() {
         LOGGER.info("getAllSorted");
-        List<Resume> allResume = doGetAllSorted();
+        List<Resume> allResume = doCopyAll();
         Collections.sort(allResume);
         return allResume;
     }
