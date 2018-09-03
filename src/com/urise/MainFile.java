@@ -15,8 +15,6 @@ public class MainFile {
             if (file.isDirectory()) {
                 System.out.println(indent + file.getName());
                 walkTree(file, indent + " ");
-            } else {
-                System.out.println(indent + file.getName());
             }
         }
     }

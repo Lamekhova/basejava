@@ -3,8 +3,6 @@ package com.urise.storage;
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
 import com.urise.serialization.SerializaionStrategy;
-import com.urise.serialization.ObjectStreamSerializer;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +12,11 @@ public class FileStorage extends AbstractStorage<File> {
 
     private File directory;
 
-    private SerializaionStrategy serializer;
+    private SerializaionStrategy serializaionStrategy;
 
-    public FileStorage(File directory) {
+    public FileStorage(File directory, SerializaionStrategy serializaionStrategy) {
         Objects.requireNonNull(directory);
-        this.serializer = new ObjectStreamSerializer();
+        this.serializaionStrategy = serializaionStrategy;
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException(directory.getAbsolutePath() + "is not directory");
         }
@@ -36,7 +34,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected void doUpdate(Resume resume, File file) {
         try {
-            serializer.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
+            serializaionStrategy.doWrite(resume, new BufferedOutputStream(new FileOutputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO Exeption", file.getName(), e);
         }
@@ -62,7 +60,7 @@ public class FileStorage extends AbstractStorage<File> {
     @Override
     protected Resume doGet(File file) {
         try {
-            return serializer.doRead(new BufferedInputStream(new FileInputStream(file)));
+            return serializaionStrategy.doRead(new BufferedInputStream(new FileInputStream(file)));
         } catch (IOException e) {
             throw new StorageException("IO Exeption", file.getName(), e);
         }
