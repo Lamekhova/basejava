@@ -8,6 +8,9 @@ public class ExperienceSection extends Section {
 
     private List<ExperienceEntry> experienceEntries;
 
+    public ExperienceSection() {
+    }
+
     public ExperienceSection(List<ExperienceEntry> experienceEntries) {
         Objects.requireNonNull(experienceEntries);
         this.experienceEntries = experienceEntries;
@@ -24,7 +27,6 @@ public class ExperienceSection extends Section {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(experienceEntries);
     }
 

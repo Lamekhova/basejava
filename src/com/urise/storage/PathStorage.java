@@ -2,7 +2,7 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-import com.urise.serialization.SerializaionStrategy;
+import com.urise.serialization.Serializer;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -18,11 +18,11 @@ public class PathStorage extends AbstractStorage<Path> {
 
     private Path directory;
 
-    private SerializaionStrategy serializaionStrategy;
+    private Serializer serializer;
 
-    public PathStorage(String dir, SerializaionStrategy serializaionStrategy) {
+    public PathStorage(String dir, Serializer serializer) {
         Objects.requireNonNull(dir);
-        this.serializaionStrategy = serializaionStrategy;
+        this.serializer = serializer;
         directory = Paths.get(dir);
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + "is not directory");
@@ -37,7 +37,7 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     protected void doUpdate(Resume resume, Path path) {
         try {
-            serializaionStrategy.doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
+            serializer.doWrite(resume, new BufferedOutputStream(Files.newOutputStream(path)));
         } catch (IOException e) {
             throw new StorageException("Error updating path", path.getFileName().toString(), e);
         }
@@ -65,7 +65,7 @@ public class PathStorage extends AbstractStorage<Path> {
     @Override
     protected Resume doGet(Path path) {
         try {
-            return serializaionStrategy.doRead(new BufferedInputStream(Files.newInputStream(path)));
+            return serializer.doRead(new BufferedInputStream(Files.newInputStream(path)));
         } catch (IOException e) {
             throw new StorageException("Error getting path", path.getFileName().toString(), e);
         }

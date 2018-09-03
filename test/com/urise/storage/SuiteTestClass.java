@@ -14,6 +14,8 @@ import static org.junit.runners.Suite.*;
         MapResumeStorageTest.class,
         FileStorageTest.class,
         PathStorageTest.class,
+        XmlPathStorageTest.class,
+        JsonPathStorageTest.class
 })
 
 public class SuiteTestClass {

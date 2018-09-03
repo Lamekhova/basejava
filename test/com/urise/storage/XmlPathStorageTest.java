@@ -1,11 +1,11 @@
 package com.urise.storage;
 
-import com.urise.serialization.ObjectStreamSerializer;
+import com.urise.serialization.XmlStreamSerializer;
 
 public class XmlPathStorageTest extends AbstractStorageTest {
 
     public XmlPathStorageTest() {
-        super(new PathStorage(PATH_STORAGE_DIR, new ObjectStreamSerializer()));
+        super(new PathStorage(FILE_STORAGE_DIR.getAbsolutePath(), new XmlStreamSerializer()));
     }
 
 }

@@ -14,7 +14,6 @@ import static org.junit.Assert.assertTrue;
 public abstract class AbstractStorageTest {
 
     protected final static File FILE_STORAGE_DIR = new File("E:\\basejava\\storage_test\\resume_file");
-    protected final static String PATH_STORAGE_DIR = "E:\\basejava\\storage_test\\resume_path";
 
     protected Storage storage;
 

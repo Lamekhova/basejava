@@ -1,5 +1,7 @@
 package com.urise.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -9,11 +11,15 @@ import java.util.Objects;
  * name - name of organization/educational center
  * startDate - start of learning/working
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ExperienceEntry implements Serializable {
     private final static long serialVersionUID = 1L;
 
     private Link name;
     private List<Position> positionsList;
+
+    public ExperienceEntry() {
+    }
 
     public ExperienceEntry(String name, String url, List<Position> positionsList) {
         Objects.requireNonNull(name);

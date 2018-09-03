@@ -1,16 +1,27 @@
 package com.urise.model;
 
+import com.urise.utill.YearMonthAdapter;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.io.Serializable;
 import java.time.YearMonth;
 import java.util.Objects;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Position implements Serializable {
     private final static long serialVersionUID = 1L;
 
+    @XmlJavaTypeAdapter(YearMonthAdapter.class)
     private YearMonth startDate;
+    @XmlJavaTypeAdapter(YearMonthAdapter.class)
     private YearMonth endDate;
     private String title;
     private String description;
+
+    public Position() {
+    }
 
     public Position(YearMonth startDate, YearMonth endDate, String title, String description) {
         Objects.requireNonNull(startDate);

@@ -8,7 +8,7 @@ import java.io.*;
 /**
  * save and restore file in ObjectStreamFormat
  */
-public class ObjectStreamSerialization implements SerializaionStrategy {
+public class ObjectStreamSerializer implements Serializer {
 
     @Override
     public void doWrite(Resume resume, OutputStream outputStream) throws IOException {
