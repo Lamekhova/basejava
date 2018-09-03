@@ -1,9 +1,12 @@
 package com.urise.serialization;
 
+import com.urise.model.Resume;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
-public interface SerializaionStrategy<T, SI, SO> {
+public interface SerializaionStrategy {
 
-    public void doWrite(T resume, SO outputStream) throws IOException;
-    public T doRead(SI inputStream) throws IOException;
+    void doWrite(Resume resume, OutputStream outputStream) throws IOException;
+    Resume doRead(InputStream inputStream) throws IOException;
 }

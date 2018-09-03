@@ -2,6 +2,7 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
+import com.urise.serialization.ObjectStreamSerializer;
 import com.urise.serialization.SerializaionStrategy;
 
 import java.io.*;
@@ -13,14 +14,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public abstract class AbstractPathStorage extends AbstractStorage<Path> {
+public class PathStorage extends AbstractStorage<Path> {
 
     private Path directory;
 
-    protected SerializaionStrategy<Resume, InputStream, OutputStream> serializer;
+    private SerializaionStrategy serializer;
 
-    public AbstractPathStorage(String dir) {
+    public PathStorage(String dir) {
         Objects.requireNonNull(dir);
+        this.serializer = new ObjectStreamSerializer();
         directory = Paths.get(dir);
         if (!Files.isDirectory(directory) || !Files.isWritable(directory)) {
             throw new IllegalArgumentException(dir + "is not directory");
@@ -77,7 +79,7 @@ public abstract class AbstractPathStorage extends AbstractStorage<Path> {
         } catch (IOException e) {
             throw new StorageException("Error size path", directory.getFileName().toString());
         }
-        List<Resume> listResume = new ArrayList<>(paths.size());
+        List<Resume> listResume = new ArrayList<>();
         for (Path element : paths) {
             listResume.add(doGet(element));
         }
