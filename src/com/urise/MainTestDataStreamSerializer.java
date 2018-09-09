@@ -1,10 +1,22 @@
 package com.urise;
 
 import com.urise.model.*;
+import com.urise.storage.serialization.DataStreamSerializer;
+import com.urise.storage.serialization.Serializer;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.YearMonth;
 import java.util.Arrays;
 
-public class MainTestResume {
+public class MainTestDataStreamSerializer {
+
+    protected final static Path FILE_STORAGE_DIR = Paths.get("E:\\basejava\\storage_test\\resume_file2");
+    private static Serializer serializer = new DataStreamSerializer();
 
     public static void main(String[] args) {
 
@@ -29,13 +41,13 @@ public class MainTestResume {
                 YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Java архитектор", null);
         Position position2 = new Position(
                 YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Старший разработчик (backend)", null);
-        ExperienceEntry experience1 = new ExperienceEntry("RIT Center",null, Arrays.asList(position1, position2));
+        ExperienceEntry experience1 = new ExperienceEntry("RIT Center","https://rit.ru", Arrays.asList(position1, position2));
 
         Position position3 = new Position(
                 YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Младший разработчик", null);
         Position position4 = new Position(
                 YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Очень младший разработчик", null);
-        ExperienceEntry experience2 = new ExperienceEntry("Wrike",null, Arrays.asList(position3, position4));
+        ExperienceEntry experience2 = new ExperienceEntry("Wrike","https://wrike.ru", Arrays.asList(position3, position4));
 
         resume.addSection(SectionType.EXPERIENCE, new ExperienceSection(Arrays.asList(experience1, experience2)));
 
@@ -43,9 +55,18 @@ public class MainTestResume {
                 YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Курсы для продолжающих", null);
         Position education2 = new Position(
                 YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Курсы для начинающих", null);
-        ExperienceEntry education = new ExperienceEntry("Udemy",null, Arrays.asList(education1, education2));
+        ExperienceEntry education = new ExperienceEntry("Udemy","https://udemy.ru", Arrays.asList(education1, education2));
         resume.addSection(SectionType.EDUCATION, new ExperienceSection(Arrays.asList(education)));
 
-        System.out.println(resume.toString());
+        try {
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(Files.newOutputStream(FILE_STORAGE_DIR));
+            serializer.doWrite(resume, bufferedOutputStream);
+            bufferedOutputStream.flush();
+            bufferedOutputStream.close();
+            Resume resumeFromFile = serializer.doRead(new BufferedInputStream(Files.newInputStream(FILE_STORAGE_DIR)));
+            System.out.println(resumeFromFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

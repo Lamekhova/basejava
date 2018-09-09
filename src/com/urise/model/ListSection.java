@@ -2,16 +2,21 @@ package com.urise.model;
 
 import java.util.*;
 
-public class ListSection extends Section {
+public class ListSection extends Section implements Iterable<String> {
     private final static long serialVersionUID = 1L;
 
     private List<String> sections;
 
     public ListSection() {
+        this.sections = new ArrayList<>();
     }
 
     public ListSection(List<String> sections) {
         this.sections = sections;
+    }
+
+    public List<String> getSections() {
+        return sections;
     }
 
     @Override
@@ -31,5 +36,10 @@ public class ListSection extends Section {
     @Override
     public String toString() {
         return sections.toString();
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return this.sections.iterator();
     }
 }

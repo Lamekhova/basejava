@@ -1,4 +1,4 @@
-package com.urise.serialization;
+package com.urise.storage.serialization;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;

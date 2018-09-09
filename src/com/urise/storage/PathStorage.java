@@ -2,7 +2,8 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-import com.urise.serialization.Serializer;
+import com.urise.storage.serialization.Serializer;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PathStorage extends AbstractStorage<Path> {
 
@@ -73,17 +75,12 @@ public class PathStorage extends AbstractStorage<Path> {
 
     @Override
     public List<Resume> doCopyAll() {
-        List<Path> paths;
-        try {
-            paths = Files.list(directory).collect(Collectors.toList());
-        } catch (IOException e) {
-            throw new StorageException("Error size path", directory.getFileName().toString());
+//        return getAllPathStream().map(this::doGet).collect(Collectors.toList());
+        List<Resume> result = new ArrayList<>();
+        for (Path path : getAllPathStream().collect(Collectors.toList())) {
+            result.add(doGet(path));
         }
-        List<Resume> listResume = new ArrayList<>();
-        for (Path element : paths) {
-            listResume.add(doGet(element));
-        }
-        return listResume;
+        return result;
     }
 
     @Override
@@ -102,6 +99,14 @@ public class PathStorage extends AbstractStorage<Path> {
             Files.list(directory).forEach(this::doDelete);
         } catch (IOException e) {
             throw new StorageException("Error deleting path", null);
+        }
+    }
+
+    private Stream<Path> getAllPathStream() {
+        try {
+            return Files.list(directory);
+        } catch (IOException e) {
+            throw new StorageException("Error directory", directory.toString());
         }
     }
 }

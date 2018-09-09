@@ -1,9 +1,10 @@
 package com.urise.model;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-public class ExperienceSection extends Section {
+public class ExperienceSection extends Section implements Iterable {
     private final static long serialVersionUID = 1L;
 
     private List<ExperienceEntry> experienceEntries;
@@ -15,6 +16,10 @@ public class ExperienceSection extends Section {
         Objects.requireNonNull(experienceEntries);
         this.experienceEntries = experienceEntries;
 
+    }
+
+    public List<ExperienceEntry> getExperienceEntries() {
+        return experienceEntries;
     }
 
     @Override
@@ -33,5 +38,10 @@ public class ExperienceSection extends Section {
     @Override
     public String toString() {
         return experienceEntries.toString();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return this.experienceEntries.iterator();
     }
 }

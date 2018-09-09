@@ -1,6 +1,6 @@
 package com.urise.storage;
 
-import com.urise.serialization.JsonStreamSerializer;
+import com.urise.storage.serialization.JsonStreamSerializer;
 
 public class JsonPathStorageTest extends AbstractStorageTest {
 

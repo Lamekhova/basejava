@@ -3,6 +3,8 @@ package com.urise.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -12,13 +14,14 @@ import java.util.Objects;
  * startDate - start of learning/working
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ExperienceEntry implements Serializable {
+public class ExperienceEntry implements Serializable, Iterable {
     private final static long serialVersionUID = 1L;
 
     private Link name;
     private List<Position> positionsList;
 
     public ExperienceEntry() {
+        this.positionsList = new ArrayList<>();
     }
 
     public ExperienceEntry(String name, String url, List<Position> positionsList) {
@@ -30,6 +33,14 @@ public class ExperienceEntry implements Serializable {
 
     public Link getName() {
         return name;
+    }
+
+    public void setName(Link name) {
+        this.name = name;
+    }
+
+    public List<Position> getPositionsList() {
+        return positionsList;
     }
 
     @Override
@@ -50,5 +61,10 @@ public class ExperienceEntry implements Serializable {
     @Override
     public String toString() {
         return name + "\n" + positionsList.toString();
+    }
+
+    @Override
+    public Iterator iterator() {
+        return positionsList.iterator();
     }
 }

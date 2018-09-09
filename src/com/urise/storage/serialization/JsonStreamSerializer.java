@@ -1,4 +1,4 @@
-package com.urise.serialization;
+package com.urise.storage.serialization;
 
 import com.urise.model.Resume;
 import com.urise.utill.JsonParser;

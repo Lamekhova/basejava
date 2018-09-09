@@ -2,7 +2,7 @@ package com.urise.storage;
 
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
-import com.urise.serialization.Serializer;
+import com.urise.storage.serialization.Serializer;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
