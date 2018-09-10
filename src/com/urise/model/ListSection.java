@@ -5,18 +5,18 @@ import java.util.*;
 public class ListSection extends Section implements Iterable<String> {
     private final static long serialVersionUID = 1L;
 
-    private List<String> sections;
+    private List<String> content;
 
     public ListSection() {
-        this.sections = new ArrayList<>();
+        this.content = new ArrayList<>();
     }
 
-    public ListSection(List<String> sections) {
-        this.sections = sections;
+    public ListSection(List<String> content) {
+        this.content = content;
     }
 
-    public List<String> getSections() {
-        return sections;
+    public List<String> getContent() {
+        return content;
     }
 
     @Override
@@ -24,22 +24,22 @@ public class ListSection extends Section implements Iterable<String> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ListSection that = (ListSection) o;
-        return Objects.equals(sections, that.sections);
+        return Objects.equals(content, that.content);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(sections);
+        return Objects.hash(content);
     }
 
     @Override
     public String toString() {
-        return sections.toString();
+        return content.toString();
     }
 
     @Override
     public Iterator<String> iterator() {
-        return this.sections.iterator();
+        return this.content.iterator();
     }
 }

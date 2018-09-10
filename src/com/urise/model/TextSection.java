@@ -14,6 +14,14 @@ public class TextSection extends Section {
         this.sectionBody = sectionBody;
     }
 
+    public String getSectionBody() {
+        return sectionBody;
+    }
+
+    public void setSectionBody(String sectionBody) {
+        this.sectionBody = sectionBody;
+    }
+
     @Override
     public String toString() {
         return sectionBody;
