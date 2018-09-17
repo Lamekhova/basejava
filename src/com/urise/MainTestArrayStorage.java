@@ -3,6 +3,8 @@ package com.urise;
 import com.urise.model.Resume;
 import com.urise.storage.SortedArrayStorage;
 import com.urise.storage.Storage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainTestArrayStorage {
 
@@ -17,6 +19,8 @@ public class MainTestArrayStorage {
         ARRAY_STORAGE.save(r1);
         ARRAY_STORAGE.save(r3);
         ARRAY_STORAGE.save(r2);
+
+        List list = new ArrayList();
 
         System.out.println("Get r1: " + ARRAY_STORAGE.get(r1.getUuid()));
         System.out.println("Size: " + ARRAY_STORAGE.size());

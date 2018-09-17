@@ -98,7 +98,7 @@ public class PathStorage extends AbstractStorage<Path> {
         try {
             Files.list(directory).forEach(this::doDelete);
         } catch (IOException e) {
-            throw new StorageException("Error deleting path", null);
+            throw new StorageException("Error deleting path");
         }
     }
 

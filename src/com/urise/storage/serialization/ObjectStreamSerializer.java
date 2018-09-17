@@ -23,7 +23,7 @@ public class ObjectStreamSerializer implements Serializer {
         try(ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
             return (Resume) objectInputStream.readObject();
         } catch (ClassNotFoundException e) {
-            throw new StorageException("Error read resume", null);
+            throw new StorageException("Error read resume");
         }
     }
 }
