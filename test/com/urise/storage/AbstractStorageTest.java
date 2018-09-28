@@ -33,15 +33,15 @@ public abstract class AbstractStorageTest {
     protected static final String UUID_4 = UUID.randomUUID().toString();
     protected static final Resume RESUME_4 = new Resume(UUID_4, "Elliot Reid");
 
-//    static {
-//        RESUME_1.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
-//        RESUME_1.addContact(ContactType.SKYPE, "aivanov");
-//        RESUME_1.addContact(ContactType.EMAIL, "aivanov@mail.ru");
-//        RESUME_1.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
-//        RESUME_1.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
-//        RESUME_1.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
-//        RESUME_1.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
-//
+    static {
+        RESUME_1.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
+        RESUME_1.addContact(ContactType.SKYPE, "aivanov");
+        RESUME_1.addContact(ContactType.EMAIL, "aivanov@mail.ru");
+        RESUME_1.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
+        RESUME_1.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        RESUME_1.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
+        RESUME_1.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
+
 //        RESUME_1.addSection(SectionType.PERSONAL,
 //                new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
 //        RESUME_1.addSection(SectionType.OBJECTIVE,
@@ -71,16 +71,16 @@ public abstract class AbstractStorageTest {
 //                                        YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Курсы для продолжающих", null),
 //                                new Position(
 //                                        YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Курсы для начинающих", null))))));
-//
-//        // RESUME 2
-//        RESUME_2.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
-//        RESUME_2.addContact(ContactType.SKYPE, "aivanov");
-//        RESUME_2.addContact(ContactType.EMAIL, "aivanov@mail.ru");
-//        RESUME_2.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
-//        RESUME_2.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
-//        RESUME_2.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
-//        RESUME_2.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
-//
+
+        // RESUME 2
+        RESUME_2.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
+        RESUME_2.addContact(ContactType.SKYPE, "aivanov");
+        RESUME_2.addContact(ContactType.EMAIL, "aivanov@mail.ru");
+        RESUME_2.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
+        RESUME_2.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        RESUME_2.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
+        RESUME_2.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
+
 //        RESUME_2.addSection(SectionType.PERSONAL,
 //                new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
 //        RESUME_2.addSection(SectionType.OBJECTIVE,
@@ -111,14 +111,14 @@ public abstract class AbstractStorageTest {
 //                                new Position(
 //                                        YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Курсы для начинающих", null))))));
 //        // RESUME 3
-//        RESUME_3.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
-//        RESUME_3.addContact(ContactType.SKYPE, "aivanov");
-//        RESUME_3.addContact(ContactType.EMAIL, "aivanov@mail.ru");
-//        RESUME_3.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
-//        RESUME_3.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
-//        RESUME_3.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
-//        RESUME_3.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
-//
+        RESUME_3.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
+        RESUME_3.addContact(ContactType.SKYPE, "aivanov");
+        RESUME_3.addContact(ContactType.EMAIL, "aivanov@mail.ru");
+        RESUME_3.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
+        RESUME_3.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        RESUME_3.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
+        RESUME_3.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
+
 //        RESUME_3.addSection(SectionType.PERSONAL,
 //                new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
 //        RESUME_3.addSection(SectionType.OBJECTIVE,
@@ -149,14 +149,14 @@ public abstract class AbstractStorageTest {
 //                                new Position(
 //                                        YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Курсы для начинающих", null))))));
 //        // RESUME 4
-//        RESUME_4.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
-//        RESUME_4.addContact(ContactType.SKYPE, "aivanov");
-//        RESUME_4.addContact(ContactType.EMAIL, "aivanov@mail.ru");
-//        RESUME_4.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
-//        RESUME_4.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
-//        RESUME_4.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
-//        RESUME_4.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
-//
+        RESUME_4.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
+        RESUME_4.addContact(ContactType.SKYPE, "aivanov");
+        RESUME_4.addContact(ContactType.EMAIL, "aivanov@mail.ru");
+        RESUME_4.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
+        RESUME_4.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        RESUME_4.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
+        RESUME_4.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
+
 //        RESUME_4.addSection(SectionType.PERSONAL,
 //                new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
 //        RESUME_4.addSection(SectionType.OBJECTIVE,
@@ -186,7 +186,7 @@ public abstract class AbstractStorageTest {
 //                                        YearMonth.parse("2015-12"), YearMonth.parse("2018-12"), "Курсы для продолжающих", null),
 //                                new Position(
 //                                        YearMonth.parse("2012-10"), YearMonth.parse("2015-11"), "Курсы для начинающих", null))))));
-//    }
+    }
 
     AbstractStorageTest(Storage storage) {
         this.storage = storage;
@@ -227,14 +227,14 @@ public abstract class AbstractStorageTest {
     public void update() {
         Resume newResume = new Resume(UUID_1, "NewName");
 
-//        newResume.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
-//        newResume.addContact(ContactType.SKYPE, "aivanov");
-//        newResume.addContact(ContactType.EMAIL, "aivanov@mail.ru");
-//        newResume.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
-//        newResume.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
-//        newResume.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
-//        newResume.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
-//
+        newResume.addContact(ContactType.TELEPHONE, "8 951-444-09-44");
+        newResume.addContact(ContactType.SKYPE, "aivanov");
+        newResume.addContact(ContactType.EMAIL, "aivanov@mail.ru");
+        newResume.addContact(ContactType.GITHUB, "https://github.com/Ivanov");
+        newResume.addContact(ContactType.LINKEDIN, "https://www.linkedin.com/in/ivanov");
+        newResume.addContact(ContactType.STACKOVERFLOW, "https://ru.stackoverflow.com/Ivanov");
+        newResume.addContact(ContactType.HOMEPAGE, "https://ivanov.ru");
+
 //        newResume.addSection(SectionType.PERSONAL,
 //                new TextSection("Мужчина, 27 лет, родился 26 июля 1991"));
 //        newResume.addSection(SectionType.OBJECTIVE,
