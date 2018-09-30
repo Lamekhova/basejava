@@ -7,7 +7,7 @@ import java.util.Properties;
 
 public class Config {
     private final static Config INSTANCE = new Config();
-    private final static String PATH_TO_PROPERTIES = "E:\\basejava\\config\\resumes_properties";
+    private final static String PATH_TO_PROPERTIES = "C:\\basejava\\config\\resumes_properties";
 
     private final File storageDir;
     private final SqlStorage storage;

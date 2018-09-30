@@ -4,6 +4,7 @@ import com.urise.exception.NotExistStorageExeption;
 import com.urise.model.ContactType;
 import com.urise.model.Resume;
 import com.urise.sql.SqlHelper;
+import com.urise.sql.SqlPerform;
 
 import java.sql.*;
 import java.util.*;
@@ -41,12 +42,8 @@ public class SqlStorage implements Storage {
                     while (resultSet.next()) {
                         String uuid = resultSet.getString("uuid");
                         String fullName = resultSet.getString("full_name");
-                        Resume resume = mapOfResume.get(uuid);
-                        if (resume == null){
-                            resume = new Resume(uuid, fullName);
-                            mapOfResume.put(uuid, resume);
-                        }
-                            addContacts(resume, resultSet);
+                        mapOfResume.computeIfAbsent(uuid, k -> new Resume(uuid, fullName));
+                        addContacts(mapOfResume.get(uuid), resultSet);
                     }
                     return new ArrayList<>(mapOfResume.values());
                 });
@@ -77,7 +74,7 @@ public class SqlStorage implements Storage {
                     throw new NotExistStorageExeption(resume.getUuid());
                 }
             }
-            deleteContacts(resume);
+            deleteContacts(resume, connection);
             insertContacts(resume, connection);
             return null;
         });
@@ -116,12 +113,12 @@ public class SqlStorage implements Storage {
         });
     }
 
-    private void deleteContacts(Resume resume) {
-        sqlHelper.perform("DELETE FROM contact WHERE resume_uuid = ?", preparedStatement -> {
-            preparedStatement.setString(1, resume.getUuid());
-            preparedStatement.execute();
-            return null;
-        });
+    private void deleteContacts(Resume resume, Connection connection) throws SQLException {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "DELETE FROM contact WHERE resume_uuid = ?")) {
+                preparedStatement.setString(1, resume.getUuid());
+                preparedStatement.execute();
+        }
     }
 
     private void insertContacts(Resume resume, Connection connection) throws SQLException {
