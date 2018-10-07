@@ -32,17 +32,17 @@ public class SqlHelper {
         }
     }
 
-    public <T> T transactionalPerform(SqlTransaction sqlTransaction) {
+    public <T> T transactionalPerform(SqlTransaction<T> sqlTransaction) {
         try (Connection connection = connectionFactory.getConnection()) {
-             try {
-                 connection.setAutoCommit(false);
-                 T result = (T) sqlTransaction.execute(connection);
-                 connection.commit();
-                 return result;
-             } catch (SQLException e) {
-                 connection.rollback();
-                 throw  ExeptionUtil.convertExeption(e);
-             }
+            try {
+                connection.setAutoCommit(false);
+                T result = sqlTransaction.execute(connection);
+                connection.commit();
+                return result;
+            } catch (SQLException e) {
+                connection.rollback();
+                throw ExeptionUtil.convertExeption(e);
+            }
         } catch (SQLException e) {
             throw new StorageException(e);
         }

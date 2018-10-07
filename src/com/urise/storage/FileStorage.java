@@ -3,6 +3,7 @@ package com.urise.storage;
 import com.urise.exception.StorageException;
 import com.urise.model.Resume;
 import com.urise.storage.serialization.Serializer;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,10 @@ public class FileStorage extends AbstractStorage<File> {
         Objects.requireNonNull(directory);
         this.serializer = serializer;
         if (!directory.isDirectory()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + "is not directory");
+            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not directory");
         }
         if (!directory.canRead() || !directory.canWrite()) {
-            throw new IllegalArgumentException(directory.getAbsolutePath() + "is not readable/writable");
+            throw new IllegalArgumentException(directory.getAbsolutePath() + " is not readable/writable");
         }
         this.directory = directory;
     }
