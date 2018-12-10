@@ -17,8 +17,8 @@ public class Resume implements Comparable<Resume>, Serializable {
     private String uuid;
     private String fullName;
 
-    private Map<ContactType, String> resumeContact = new EnumMap<>(ContactType.class);
-    private Map<SectionType, Section> resumeSection = new EnumMap<>(SectionType.class);
+    private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+    private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
 
     public Resume() {
     }
@@ -40,20 +40,40 @@ public class Resume implements Comparable<Resume>, Serializable {
         return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public Map<ContactType, String> getResumeContact() {
-        return resumeContact;
+        return contacts;
     }
 
     public Map<SectionType, Section> getResumeSection() {
-        return resumeSection;
+        return sections;
     }
 
     public void addSection(SectionType sectionType, Section section) {
-        resumeSection.put(sectionType, section);
+        sections.put(sectionType, section);
     }
 
     public void addContact(ContactType contactType, String contact) {
-        resumeContact.put(contactType, contact);
+        contacts.put(contactType, contact);
+    }
+
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public Section getSection(SectionType type) {
+        return sections.get(type);
+    }
+
+    public void setContact(ContactType type, String value) {
+        contacts.put(type, value);
+    }
+
+    public void setSection(SectionType type, Section section) {
+        sections.put(type, section);
     }
 
     @Override
@@ -63,23 +83,23 @@ public class Resume implements Comparable<Resume>, Serializable {
         Resume resume = (Resume) o;
         return Objects.equals(uuid, resume.uuid) &&
                 Objects.equals(fullName, resume.fullName) &&
-                Objects.equals(resumeContact, resume.resumeContact) &&
-                Objects.equals(resumeSection, resume.resumeSection);
+                Objects.equals(contacts, resume.contacts) &&
+                Objects.equals(sections, resume.sections);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(uuid, fullName, resumeContact, resumeSection);
+        return Objects.hash(uuid, fullName, contacts, sections);
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(fullName);
-        for (Map.Entry element : resumeContact.entrySet()){
+        for (Map.Entry element : contacts.entrySet()){
             stringBuilder.append("\n" + element.getKey() + ": \n" + element.getValue() + "\n");
         }
-        for (Map.Entry element : resumeSection.entrySet()){
+        for (Map.Entry element : sections.entrySet()){
             stringBuilder.append("\n" + element.getKey() + ": \n" + element.getValue());
         }
         return stringBuilder.toString();

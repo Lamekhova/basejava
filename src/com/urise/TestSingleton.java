@@ -16,5 +16,6 @@ public class TestSingleton {
 
     public static void main(String[] args) {
         System.out.println(getInstance().toString());
+        System.out.println((3169 % 13) + 1);
     }
 }
