@@ -3,16 +3,66 @@ package com.urise.model;
 public enum ContactType {
 
     TELEPHONE("Номер телефона"),
-    SKYPE("Скайп"),
-    EMAIL("Электронная почта"),
-    LINKEDIN("Профиль LinkedIn"),
-    GITHUB("Профиль GitHub"),
-    STACKOVERFLOW("Профиль Stackoverflow"),
-    HOMEPAGE("Домашняя страница");
+    SKYPE("Скайп") {
+        @Override
+        public String toHtml0(String value) {
+            return getTitle() + ": " + toLink("skype:" + value, value);
+        }
+    },
+    EMAIL("Электронная почта") {
+        @Override
+        public String toHtml0(String value) {
+            return getTitle() + ": " + toLink("mailto:" + value, value);
+        }
+    },
+    LINKEDIN("Профиль LinkedIn") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    },
+    GITHUB("Профиль GitHub") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    },
+    STACKOVERFLOW("Профиль Stackoverflow") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    },
+    HOMEPAGE("Домашняя страница") {
+        @Override
+        public String toHtml0(String value) {
+            return toLink(value);
+        }
+    };
 
     private String title;
 
     ContactType(String title) {
         this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    protected String toHtml0(String value) {
+        return title + ": " + value;
+    }
+
+    public String toHtml(String value) {
+        return (value == null) ? "" : toHtml0(value);
+    }
+
+    public String toLink(String href) {
+        return toLink(href, title);
+    }
+
+    public static String toLink(String href, String title) {
+        return "<a href='" + href + "'>" + title + "</a>";
     }
 }
