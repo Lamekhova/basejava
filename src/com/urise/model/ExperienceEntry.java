@@ -3,10 +3,7 @@ package com.urise.model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * contains details on industry/educational experience
@@ -17,18 +14,33 @@ import java.util.Objects;
 public class ExperienceEntry implements Serializable, Iterable {
     private final static long serialVersionUID = 1L;
 
+    public static final ExperienceEntry EMPTY = new ExperienceEntry("", "", Position.EMPTY);
+
     private Link name;
-    private List<Position> positionsList;
+    private List<Position> positionsList = new ArrayList<>();
 
     public ExperienceEntry() {
-        this.positionsList = new ArrayList<>();
     }
 
-    public ExperienceEntry(String name, String url, List<Position> positionsList) {
+    public ExperienceEntry(String name, String url, Position... positions) {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(positions);
+        this.name = new Link(name, url);
+        this.positionsList = Arrays.asList(positions);
+    }
+
+    public ExperienceEntry(String name, String url, List<Position> positions) {
+        Objects.requireNonNull(name);
+        Objects.requireNonNull(positions);
+        this.name = new Link(name, url);
+        this.positionsList = new ArrayList<>(positions);
+    }
+
+    public ExperienceEntry(Link name, List<Position> positionsList) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(positionsList);
-        this.name = new Link(name, url);
-        this.positionsList = positionsList;
+        this.name = name;
+        this.positionsList = new ArrayList<>(positionsList);
     }
 
     public Link getName() {

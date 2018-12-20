@@ -33,14 +33,7 @@
                 <td colspan="2"><h2><a name="type.name">${type.name()}</a></h2></td>
             </tr>
             <c:choose>
-                <c:when test="${type=='OBJECTIVE'}">
-                    <tr>
-                        <td colspan="2">
-                            <%=((TextSection) section).getSectionBody()%>
-                        </td>
-                    </tr>
-                </c:when>
-                <c:when test="${type=='PERSONAL'}">
+                <c:when test="${type=='OBJECTIVE' || type=='PERSONAL'}">
                     <tr>
                         <td colspan="2">
                             <%=((TextSection) section).getSectionBody()%>
@@ -75,8 +68,9 @@
                         <c:forEach var="position" items="${org.positionsList}">
                             <jsp:useBean id="position" type="com.urise.model.Position"/>
                             <tr>
-                                <td><b>${position.startDate}</b> - <b>${position.endDate}</b> <b>${position.title}</b><br>
-                                       ${position.description}</td>
+                                <td><b>${position.startDate}</b> - <b>${position.endDate}</b>
+                                    <b>${position.title}</b><br>
+                                        ${position.description}</td>
                             </tr>
                         </c:forEach>
                     </c:forEach>
@@ -85,6 +79,7 @@
         </c:forEach>
     </table>
     <br/>
+    <button onclick="window.history.back()">ОК</button>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>

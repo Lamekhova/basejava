@@ -60,14 +60,14 @@
                                     <dt>Дата начала:</dt>
                                     <dd>
                                         <input type="month" name="${type}${counter.index}startDate" size=10
-                                               value="<%=pos.getStartDate()%>" placeholder="MM/yyyy">
+                                               value="<%=pos.getStartDate()%>">
                                     </dd>
                                 </dl>
                                 <dl>
                                     <dt>Дата окончания:</dt>
                                     <dd>
                                         <input type="month" name="${type}${counter.index}endDate" size=10
-                                               value="<%=pos.getEndDate()%>" placeholder="MM/yyyy">
+                                               value="<%=pos.getEndDate()%>">
                                 </dl>
                                 <dl>
                                     <dt>Должность:</dt>

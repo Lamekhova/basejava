@@ -1,3 +1,7 @@
+body {
+    font: 12px Arial;
+}
+
 section {
     width: 900px;
     margin: auto;

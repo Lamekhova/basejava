@@ -4,10 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -19,6 +16,17 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
+
+    public static final Resume EMPTY_RESUME = new Resume();
+
+    static {
+        EMPTY_RESUME.setSection(SectionType.OBJECTIVE, new TextSection(""));
+        EMPTY_RESUME.setSection(SectionType.PERSONAL, new TextSection(""));
+        EMPTY_RESUME.setSection(SectionType.ACHIEVEMENT, new ListSection(Collections.emptyList()));
+        EMPTY_RESUME.setSection(SectionType.QUALIFICATION, new ListSection(Collections.emptyList()));
+        EMPTY_RESUME.setSection(SectionType.EXPERIENCE, new ExperienceSection(Arrays.asList(ExperienceEntry.EMPTY)));
+        EMPTY_RESUME.setSection(SectionType.EDUCATION, new ExperienceSection(Arrays.asList(ExperienceEntry.EMPTY)));
+    }
 
     public Resume() {
     }

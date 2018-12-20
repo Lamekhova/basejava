@@ -13,6 +13,8 @@ import java.util.Objects;
 public class Position implements Serializable {
     private final static long serialVersionUID = 1L;
 
+    public static final Position EMPTY = new Position();
+
     @XmlJavaTypeAdapter(YearMonthAdapter.class)
     private YearMonth startDate;
     @XmlJavaTypeAdapter(YearMonthAdapter.class)

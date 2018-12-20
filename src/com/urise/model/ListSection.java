@@ -11,6 +11,10 @@ public class ListSection extends Section implements Iterable<String> {
         this.content = new ArrayList<>();
     }
 
+    public ListSection(String... strings) {
+        this(Arrays.asList(strings));
+    }
+
     public ListSection(List<String> content) {
         this.content = content;
     }
