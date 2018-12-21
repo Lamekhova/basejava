@@ -23,17 +23,11 @@ public class ExperienceEntry implements Serializable, Iterable {
     }
 
     public ExperienceEntry(String name, String url, Position... positions) {
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(positions);
-        this.name = new Link(name, url);
-        this.positionsList = Arrays.asList(positions);
+        this(new Link(name, url), Arrays.asList(positions));
     }
 
-    public ExperienceEntry(String name, String url, List<Position> positions) {
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(positions);
-        this.name = new Link(name, url);
-        this.positionsList = new ArrayList<>(positions);
+    public ExperienceEntry(String name, String url, List<Position> positionsList) {
+        this(new Link(name, url), new ArrayList<>(positionsList));
     }
 
     public ExperienceEntry(Link name, List<Position> positionsList) {

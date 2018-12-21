@@ -6,10 +6,9 @@ import java.time.format.DateTimeFormatter;
 public class DateUtil {
 
     public static YearMonth parse(String date) {
-        if (ServletUtil.isEmpty(date)) {
+        if (date == null || date.trim().length() == 0) {
             return YearMonth.now();
         }
-        YearMonth yearMonth = YearMonth.parse(date, DateTimeFormatter.ofPattern("yyyy-MM"));
-        return yearMonth;
+        return YearMonth.parse(date, DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 }

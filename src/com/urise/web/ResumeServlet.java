@@ -4,7 +4,6 @@ import com.urise.Config;
 import com.urise.model.*;
 import com.urise.storage.Storage;
 import com.urise.utill.DateUtil;
-import com.urise.utill.ServletUtil;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -31,7 +30,7 @@ public class ResumeServlet extends HttpServlet {
         String uuid = request.getParameter("uuid");
         String fullName = request.getParameter("fullName");
         Resume resume;
-        if (uuid == null || uuid.length() == 0) {
+        if (isEmptyData(uuid)) {
             resume = new Resume(fullName);
         } else {
             resume = storage.get(uuid);
@@ -48,7 +47,7 @@ public class ResumeServlet extends HttpServlet {
         for (SectionType type : SectionType.values()) {
             String value = request.getParameter(type.name());
             String[] values = request.getParameterValues(type.name());
-            if (ServletUtil.isEmpty(value) && values.length < 2) {
+            if (isEmptyData(value) && values.length < 2) {
                 resume.getResumeSection().remove(type);
             } else {
                 switch (type) {
@@ -66,7 +65,7 @@ public class ResumeServlet extends HttpServlet {
                         String[] urls = request.getParameterValues(type.name() + "url");
                         for (int i = 0; i < values.length; i++) {
                             String name = values[i];
-                            if (!ServletUtil.isEmpty(name)) {
+                            if (!isEmptyData(name)) {
                                 List<Position> positions = new ArrayList<>();
                                 String pfx = type.name() + i;
                                 String[] startDates = request.getParameterValues(pfx + "startDate");
@@ -74,7 +73,7 @@ public class ResumeServlet extends HttpServlet {
                                 String[] titles = request.getParameterValues(pfx + "title");
                                 String[] descriptions = request.getParameterValues(pfx + "description");
                                 for (int j = 0; j < titles.length; j++) {
-                                    if (!ServletUtil.isEmpty(titles[j])) {
+                                    if (!isEmptyData(titles[j])) {
                                         positions.add(new Position(DateUtil.parse(startDates[j]), DateUtil.parse(endDates[j]), titles[j], descriptions[j]));
                                     }
                                 }
@@ -157,5 +156,9 @@ public class ResumeServlet extends HttpServlet {
         request.setAttribute("resume", resume);
         request.getRequestDispatcher(("view".equals(action) ? "/WEB-INF/jsp/view.jsp" : "/WEB-INF/jsp/edit.jsp"))
                 .forward(request, response);
+    }
+
+    private static boolean isEmptyData(String str) {
+        return str == null || str.trim().length() == 0;
     }
 }
