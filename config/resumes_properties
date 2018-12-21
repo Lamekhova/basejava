@@ -1,4 +1,0 @@
-storage.dir=C:/basejava/storage_test/resume_file
-db.url=jdbc:postgresql://localhost:5432/resumes
-db.user=postgres
-db.password=436103
