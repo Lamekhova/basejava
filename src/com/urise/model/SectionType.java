@@ -4,7 +4,7 @@ public enum SectionType {
 
     PERSONAL("Личные качества"),
     OBJECTIVE("Позиция"),
-    ACHIEVEMENT("Достижение"),
+    ACHIEVEMENT("Достижения"),
     QUALIFICATION("Квалификация"),
     EXPERIENCE("Опыт работы"),
     EDUCATION("Образование");
@@ -13,5 +13,9 @@ public enum SectionType {
 
     SectionType(String title) {
         this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
     }
 }
