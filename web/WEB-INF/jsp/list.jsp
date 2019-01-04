@@ -12,7 +12,7 @@
 <body>
 <div class="container">
     <jsp:include page="fragments/header.jsp"/>
-    <div class="jumbotron">
+    <div class="jumbotron" style="padding-left: 0px; padding-right: 0px">
         <h1>База данных резюме</h1>
         <table class="simple-little-table" cellspacing='0'>
             <tr>

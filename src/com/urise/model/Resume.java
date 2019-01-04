@@ -28,16 +28,28 @@ public class Resume implements Comparable<Resume>, Serializable {
         EMPTY_RESUME.setSection(SectionType.EDUCATION, new ExperienceSection(Arrays.asList(ExperienceEntry.EMPTY)));
     }
 
+    private void initResumeSections() {
+        this.setSection(SectionType.OBJECTIVE, new TextSection(""));
+        this.setSection(SectionType.PERSONAL, new TextSection(""));
+        this.setSection(SectionType.ACHIEVEMENT, new ListSection(Collections.emptyList()));
+        this.setSection(SectionType.QUALIFICATION, new ListSection(Collections.emptyList()));
+        this.setSection(SectionType.EXPERIENCE, new ExperienceSection(Arrays.asList(ExperienceEntry.EMPTY)));
+        this.setSection(SectionType.EDUCATION, new ExperienceSection(Arrays.asList(ExperienceEntry.EMPTY)));
+    }
+
     public Resume() {
+        initResumeSections();
     }
 
     public Resume(String fullName) {
         this(UUID.randomUUID().toString(), fullName);
+        initResumeSections();
     }
 
     public Resume(String uuid, String fullName) {
         this.uuid = uuid;
         this.fullName = fullName;
+        initResumeSections();
     }
 
     public String getUuid() {
@@ -97,7 +109,6 @@ public class Resume implements Comparable<Resume>, Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(uuid, fullName, contacts, sections);
     }
 
